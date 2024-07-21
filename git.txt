@@ -55,9 +55,12 @@ if conflict
 	pushing
 local folder → repo
 	create repo on github
+    git init
+    git branch -M main # changes branch masters name to main
 	git remote add origin ‹repo link>
 		adds alias for repo link
-	git push origin ‹branch>
+    git add ., git commit -m "first commit"
+	git push -u origin main
 		pushes to repo
 repo → local repo
 	create repo on github

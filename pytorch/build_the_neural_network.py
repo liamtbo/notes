@@ -32,7 +32,44 @@ class NeuralNetwork(nn.Module):
     
 model = NeuralNetwork().to(device)
 X = torch.rand(1, 28, 28, device=device)
+# don't call model.forward() !
 logits = model(X) # outputs 2d tensor where dim=0 are each output neurons logit
 pred_probab = nn.Softmax(dim=1)(logits)
 y_pred = pred_probab.argmax(1)
 print(f"Predicted class: {y_pred}")
+
+# model layers
+input_image = torch.rand(3,28,28)
+print(input_image.size())
+
+flatten = nn.Flatten()
+flat_image = flatten(input_image)
+print(flat_image.size())
+
+layer1 = nn.Linear(in_features=28*28, out_features=20)
+hidden1 = layer1(flat_image)
+print(hidden1.size())
+
+print(f"Before ReLU: {hidden1}\n\n")
+hidden1 = nn.ReLU()(hidden1)
+print(f"After ReLU: {hidden1}")
+
+seq_modules = nn.Sequential(
+    flatten,
+    layer1,
+    nn.ReLU(),
+    nn.Linear(20, 10)
+)
+input_image = torch.rand(3,28,28)
+logits = seq_modules(input_image)
+
+softmax = nn.Softmax(dim=1)
+pred_probab = softmax(logits)
+
+print(f"Model Structure: {model}\n\n")
+print(f"Model paramters:")
+for param in model.parameters():
+    print(f"param: {param}")
+
+for name, param in model.named_parameters():
+    print(f"Layer: {name} | Size: {param.size()} | Values : {param[:2]} \n")

@@ -1,0 +1,8 @@
+conda create --name <new env name> python=x
+conda activate < env name>
+activate env < env name>
+conda deactivate < env name>
+conda list
+	lists all packages installed in curr env
+conda env list
+conda install -c conda-forge gymnasium

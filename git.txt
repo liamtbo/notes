@@ -1,0 +1,79 @@
+.git
+	git will track the folder .git is in
+modified → staged → committed
+git init
+	initializes repo, adds .git folder
+git status
+	shows files modified (red) and in the staging area (green)
+git rm -cached ‹file>
+	removes file from staging area
+git add <file>
+	adds file to staging area
+git commit -m "message"
+	committing staged files
+git log -oneline
+	shows commit history
+
+undoing things
+git checkout ‹commit id>
+	look at code from previous commit (read-only)
+	git checkout < branch>
+		get us back
+	need to pushh branch before checking out new one
+git revert < commit id›
+	undo commit
+	hit "Q, no buffer
+git reset < commit id>
+	--hard
+		doesn't retain in code in repo resets repo to a previous commit
+
+branches
+make sure to commit before switching branches
+master branch
+	stable grade code (not for adding in new code until vetted)
+git branch ‹new branch name>
+	creates new branch
+git branch -a
+	shows all branches
+	asterisk and green means active branch
+git checkout ‹branch name>
+	switch branch to work on
+git branch -d ‹branch name>
+	delete merged branch
+git branch -D < branch name>
+	delete unmerged branch
+git checkout -b ‹branch name>
+	be mindful of what branch you're branching from!
+	creates new branch and switches to it
+
+merging
+be in branch want to merge into
+git merge ‹merging branch>
+if conflict
+	open conflict file, delete what you want removed including « = »
+	add, commit
+	pushing
+local folder → repo
+	create repo on github
+	git remote add origin ‹repo link>
+		adds alias for repo link
+	git push origin ‹branch>
+		pushes to repo
+repo → local repo
+	create repo on github
+	copy clone/download link git clone ‹clone link>
+	git push origin < branch>
+	git remote
+	fetch, push info
+
+collaboration on github
+start in local master branch
+git pull origin master
+git checkout -b new-branch
+* edit branch *
+add, commit
+* do not merge on local master branch *
+* push branch so others can review code *
+git push origin new-branch
+* compare pull-req on github *
+merge pull requests if approved and delete new-branch

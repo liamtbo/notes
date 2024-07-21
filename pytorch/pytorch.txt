@@ -1,0 +1,46 @@
+tensors
+    creating tensors
+        essentially numpy array/matrix that can run on GPUs
+        x_data = torch.tensor([[1,2],[3,4]])
+        x_np = torch.from_numpy(np_array)
+        x_ones = torch.ones_like(x_data) # shape of x_data but all ones
+        x_rand = torch.rand_like(x_data, dtype=torch.float) # shape of x_data but all random
+        rand_tensor = torch.rand(shape)
+        ones_tensor = torch.ones(shape)
+        zeros_tensor = torch.zeros(shape)
+    attributes
+        tensor.shape
+        tensor.dtype
+        tensor.devices
+    operations
+        standard.
+    move tensor to GPU instead of CPU
+        if torch.cuda.is_available():
+            tensor = tensor.to('cuda')
+    indexing & slicing
+        tensor = torch.ones(4, 4)
+        print('First row: ',tensor[0])
+        print('First column: ', tensor[:, 0])
+        print('Last column:', tensor[..., -1])
+        tensor[:,1] = 0
+    concatenation
+        t1 = torch.cat([tensor1, tensor2, tensor3], dim=1) # dim concats rows of each tensor matrix
+    matrix mult
+        y2 = tensor.matmul(tensor.T)
+    element-wise
+        z1 = tensor * tensor
+    single element tensor to python number value
+        tensor.item()
+
+Datasets & DataLoaders
+    data primitives
+        torch.utils.data.DataLoader
+            wraps iterable around dataset
+        torch.untils.data.Dataset
+            access datasets
+    * take a look at examples *
+
+Transforms
+    We use transforms to perform some manipulation of the data and make it suitable for training.
+    All TorchVision datasets have two parameters -transform to modify the features and 
+    target_transform to modify the labels - that accept callables containing the transformation logic. 

@@ -43,8 +43,8 @@ git branch -d ‹branch name>
 git branch -D < branch name>
 	delete unmerged branch
 git checkout -b ‹branch name>
-	be mindful of what branch you're branching from!
 	creates new branch and switches to it
+	be mindful of what branch you're branching from!
 
 merging
 be in branch want to merge into

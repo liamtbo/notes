@@ -32,37 +32,9 @@ tensors
     single element tensor to python number value
         tensor.item()
 
-Datasets & DataLoaders
-    data primitives
-        torch.utils.data.DataLoader
-            wraps iterable around dataset
-        torch.untils.data.Dataset
-            access datasets
-    * take a look at examples *
+Loss functions
+    nn.SmoothL1loss(predicted, actual)
+        acts like the mean squared error when the error is small, but like the 
+        mean absolute error when the error is large - this makes it more robust 
+        to outliers when the estimates of QQ are very noisy
 
-Transforms
-    We use transforms to perform some manipulation of the data and make it suitable for training.
-    All TorchVision datasets have two parameters -transform to modify the features and 
-    target_transform to modify the labels - that accept callables containing the transformation logic. 
-
-autograd
-    reasons one would want to disable gradient tracking
-        mark some parameters in your nn as frozen parameters
-        speed up compuation when only doing forward pass
-    Conceptually, autograd keeps a record of data (tensors) and all executed 
-    operations (along with the resulting new tensors) in a directed acyclic graph (DAG) 
-    consisting of Function objects. In this DAG, leaves are the input tensors, roots 
-    are the output tensors. By tracing this graph from roots to leaves, you can 
-    automatically compute the gradients using the chain rule.
-    In a forward pass, autograd does two things simultaneously:
-        run the requested operation to compute a resulting tensor
-        maintain the operation’s gradient function in the DAG.
-    The backward pass kicks off when .backward() is called on the DAG root. autograd then:
-        computes the gradients from each .grad_fn,
-        accumulates them in the respective tensor’s .grad attribute
-        using the chain rule, propagates all the way to the leaf tensors.
-    DAGs are dynamic
-        change shape,size,ops of model after every iterations
-
-    DAG: x -> * -> z -> CE -> loss
-             w^   b^   y^

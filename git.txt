@@ -45,6 +45,13 @@ git branch -D < branch name>
 git checkout -b ‹branch name>
 	creates new branch and switches to it
 	be mindful of what branch you're branching from!
+renaming branch
+    git checkout old-branch-name
+    git branch -m new-branch-name
+    git push origin new-branch-name
+    git push origin --delete old-branch-name
+    git push --set-upstream origin new-branch-name
+
 
 merging
 be in branch want to merge into

@@ -51,7 +51,8 @@ renaming branch
     git push origin new-branch-name
     git push origin --delete old-branch-name
     git push --set-upstream origin new-branch-name
-
+pushing new branch
+    git push origin new-branch-name
 
 merging
 be in branch want to merge into

@@ -1,0 +1,47 @@
+gradient clipping
+    used during the training of deep neural networks to prevent the exploding gradient problem
+exploding gradients
+    very deep nn runs the highest risk
+    gradients become very large as parameters are multiplied through forward pass
+vanishing gradients
+    opposite of exploding
+
+large batch size (small if the opposite)
+    generalization issues
+        overfitting
+            lower variance in gradient est., but can result in overfitting
+        poor generalization 
+            since less noisy gradient creates smoother optimization landscape
+            harder to escape sharp minima
+    learning dynamics
+        diminished regularization
+            bc less grad noise
+        slower exploration
+            less frequent updates to model params so slower exploration param space slower
+    computational and memory contraints
+        resource intensice
+            requires more memory
+        diminished returns
+            increasing batch size eventually reduces benefits of reduced grad noise
+    learning rate and training stability
+        learning rate sensitity - requires larger lr to maintain efficient training progress
+    
+            
+    reduced noise in gradient estimation
+    increase in overfitting bc it makes optimization landscape smoother
+    potentially making it easier for the model to settle into sharp minima = poorer generalization
+
+small batch size
+    opposite of large batch size
+
+sharp minima
+    Points in the loss landscape of a neural network where the loss function has a steep curvature.
+    These minimizers are typically associated with narrow, deep valleys in the loss landscape.
+    less stable - small changes in model params or input can lead to large increases in loss
+    associated with overfitting 
+        inputs change (like validation data) can lead to small movement in valley = large loss
+
+flat minima
+    opposite of sharp minima
+
+

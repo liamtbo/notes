@@ -22,18 +22,18 @@ d = c + 1
 out = d.sum()
 # print(out)
 
-# print('d:')
-# print(d.grad_fn)
-# print(d.grad_fn.next_functions)
-# print(d.grad_fn.next_functions[0][0].next_functions)
-# print(d.grad_fn.next_functions[0][0].next_functions[0][0].next_functions)
-# print(d.grad_fn.next_functions[0][0].next_functions[0][0].next_functions[0][0].next_functions)
-# print('\nc:')
-# print(c.grad_fn)
-# print('\nb:')
-# print(b.grad_fn)
-# print('\na:')
-# print(a.grad_fn)
+print('d:')
+print(d.grad_fn)
+print(d.grad_fn.next_functions)
+print(d.grad_fn.next_functions[0][0].next_functions)
+print(d.grad_fn.next_functions[0][0].next_functions[0][0].next_functions)
+print(d.grad_fn.next_functions[0][0].next_functions[0][0].next_functions[0][0].next_functions)
+print('\nc:')
+print(c.grad_fn)
+print('\nb:')
+print(b.grad_fn)
+print('\na:')
+print(a.grad_fn)
 
 out.backward()
 # print(a.grad)
@@ -151,4 +151,4 @@ with torch.autograd.profiler.profile(use_cuda=run_on_gpu) as prf:
     for _ in range(1000):
         z = (z / x) * y
 
-print(prf.key_averages().table(sort_by='self_cpu_time_total'))
+# print(prf.key_averages().table(sort_by='self_cpu_time_total'))

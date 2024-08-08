@@ -44,4 +44,15 @@ sharp minima
 flat minima
     opposite of sharp minima
 
+policy gradient methods
+    class of algos in RL used to directly optimize the policy
+    not a value function like DQN
+    useful for env with contrinuous action spaces
+
+regression task
+    predicting a continuous value based on inputs
+batch gradient descent
+    using whole dataset to compute gradient
+stocastic gradient descent
+    using a small batch to comppute gradient
 

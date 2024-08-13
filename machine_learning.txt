@@ -56,3 +56,64 @@ batch gradient descent
 stocastic gradient descent
     using a small batch to comppute gradient
 
+Actor-critic
+    Policy (actor)
+        returns action based on policy and state
+    Value function (critic)
+        returns state and state-action value
+    A(s,a) advantage function
+        A(s,a) = Q(s,a) - V(s)
+
+rl algos
+    Base Actor critic
+    A2C
+    A3C
+    Proximal Policu Optimization (PPO)
+    DQN
+    Sarsa
+    Expected Sarsa
+    dyna-Q (+)
+
+Advantage Actor-Critic A2C
+    actor (policy) gradient
+        ∇θ​J(θ)≈N1​∑i=0N​∇θ​logπθ​(ai​∣si​)⋅A(si​,ai​)
+    critic (value) gradient
+        ∇w​J(w)≈N1​∑i=1N​∇w​(Vw​(si​)−Qw​(si​,ai​))2
+
+PPO
+    actor-critic frameworks
+    use log prob instead of raw prob - more stable
+    actor (policy) network update
+        r(θ)= importance weights = π'θ​(a∣s) / πθ​(a∣s)​​
+        L_ppo​(θ)=E[min(r(θ)⋅A(s,a),clip(r(θ),1−ϵ,1+ϵ)⋅A(s,a))]
+    critic (value) network update
+        Lcritic​(ϕ)=E[(Vϕ​(s)−Rt​)2]
+
+non-linearity
+    functions
+        tanh
+        ReLU
+activation functions
+    reLU
+    tanh
+        non-linearity and activation
+            allows neural network to learn more complex functions
+            without non-linearility -> nn will be a linear model
+        output range control
+            bounds outputs between [-1,1] - keeps values from growing too large or small (instability)
+            symmetry around zero - helps when action space is continious and can be pos/neg
+        gradient propagation
+            suffers from vanishing gradient problem in deep nn
+            in moderate nn's, it can ensure grads aren't too large or too small
+        network regularization
+            smoothing effect on networks outputs
+    
+
+neural networks
+    data should always be normalized (distribution created) before being fed to a neural network
+
+    tanh-normal distribution
+        normal dis output is ran through tanh function
+        used in continuous action spaces, to ensure that the action values remain within 
+        a specific range.
+        adds non-linearity

@@ -4,3 +4,7 @@ conda install -c conda-forge gymnasium
 vscode
     sign in
     ctrl-p, >, select python interpreter, choose conda
+
+selecting conda interpreter:
+    ctrl+p -> > pick conda env
+

@@ -6,3 +6,6 @@ conda list
 	lists all packages installed in curr env
 conda env list
 conda install -c conda-forge gymnasium
+conda remove --name env_name -all 
+
+ctrl+p -> > pick conda env

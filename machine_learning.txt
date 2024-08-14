@@ -73,6 +73,7 @@ rl algos
     Sarsa
     Expected Sarsa
     dyna-Q (+)
+    DDPG
 
 Advantage Actor-Critic A2C
     actor (policy) gradient

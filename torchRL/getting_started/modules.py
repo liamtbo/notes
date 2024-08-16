@@ -77,7 +77,7 @@ exploration_module = EGreedyModule(
 # policy gives action, then egreedy choses that or random
 # this is how egreedy gets access to action space
 exploration_policy = TensorDictSequential(policy, exploration_module)
-
+# for continuoous action spaces
 with set_exploration_type(ExplorationType.MEAN):
     rollout = env.rollout(max_steps=10, policy=exploration_policy)
 with set_exploration_type(ExplorationType.RANDOM):

@@ -8,3 +8,5 @@ vscode
 selecting conda interpreter:
     ctrl+p -> > pick conda env
 
+conda install -c pytorch torchvision torchaudio
+pip install torchrl

@@ -1,6 +1,5 @@
 conda with python 3.11
 pytorch installed in conda with cuda
-conda install -c conda-forge gymnasium
 vscode
     sign in
     ctrl-p, >, select python interpreter, choose conda
@@ -8,5 +7,10 @@ vscode
 selecting conda interpreter:
     ctrl+p -> > pick conda env
 
-conda install -c pytorch torchvision torchaudio
+
+conda create --name env3.11 python=3.11 # gymnaiusm doesn't run on 12
+conda install -c pytorch torchvision cudatoolkit
 pip install torchrl
+conda install pygame
+conda install gymnasium
+conda install -c conda-forge av

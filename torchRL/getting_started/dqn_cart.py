@@ -57,9 +57,11 @@ record_env = TransformedEnv(
 total_count = 0
 total_episodes = 0
 t0 = time.time()
+# total frames = -1 -> collector will sample batches of 100 forever (until break is hit)
 for i, data in enumerate(collector):
     # Write data in replay buffer
     rb.extend(data)
+    # grabs the highest step count somehow
     max_length = rb[:]["next", "step_count"].max()
     if len(rb) > init_rand_steps:
         # Optim loop (we do several optim steps
@@ -78,6 +80,7 @@ for i, data in enumerate(collector):
                 # torchrl_logger.info(f"Max num steps: {max_length}, rb length {len(rb)}")
             total_count += data.numel()
             total_episodes += data["next", "done"].sum()
+    # when cartpole can keep it up for over 200 steps, we've found a solution 
     if max_length > 200:
         break
 

@@ -3,6 +3,7 @@
 ## collectors don't reset, meaning multiple batches can be from same trajectory/episode
 import torch
 torch.manual_seed(0)
+
 from torchrl.collectors import SyncDataCollector
 from torchrl.envs import GymEnv
 from torchrl.envs.utils import RandomPolicy
@@ -17,7 +18,7 @@ collector = SyncDataCollector(env, policy, frames_per_batch=200, total_frames=-1
 # each iteration will collect 200 env interactions
 # data[collector, fields] records the transitions corresponding trajectory number
 for data in collector:
-    # print(data)
+    print(data)
     break
 
 # ----------------------------------------
@@ -27,4 +28,4 @@ buffer = ReplayBuffer(storage=LazyMemmapStorage(max_size=1000))
 indices = buffer.extend(data) # or use .add for single element
 assert len(buffer) == collector.frames_per_batch
 sample = buffer.sample(batch_size=30)
-print(sample)
+# print(sample)

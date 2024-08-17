@@ -14,3 +14,4 @@ pip install torchrl
 conda install pygame
 conda install gymnasium
 conda install -c conda-forge av
+conda install conda-forge::gymnasium-box2d

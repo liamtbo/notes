@@ -1,0 +1,90 @@
+https://pytorch.org/rl/stable/reference/generated/knowledge_base/DEBUGGING_RL.html
+
+General
+    Have you validated your algorithm implementation on a few small, 
+    toy problems with known optimal returns e.g. gridworlds, mountaincar?
+        Reason: This will reveal any extreme bugs in your implementation.
+
+    Have you visualized your agents?
+        Reason: This will reveal things the learning curves won’t tell you 
+        (i.e., bug or exploit in a video game).
+
+    Be very careful with any data augmentation.
+        Reason: Data augmentation cannot be applied to RL in the same ways as 
+        CV since an agent needs to act based on the observation. As an example, 
+        flipping an image may correspondingly “flip” the appropriate action.
+
+Policy
+    Does the entropy of your policy converge too quickly, too slowly or change 
+    drastically?
+        entropy - randomness of action selection
+        quicky - not enough exploration, settled on suboptimal policy.
+        slowly - too much exploration, takes too long to find optimal policy
+
+        Reason: This can be algorithm dependent, but the entropy of the policy is 
+        roughly inversely related to the expected value of actions. i.e higher
+        the randomness, the smaller the evg expected value of actions (vice-verse0).
+        The reason being is with high entropy, the policy choosing smaller 
+        expected value actions
+
+        Prescription: Tuning the coefficient of an entropy bonus (i.e., beta in PPO)
+        can help entropies that converge too quickly/slowly. 
+        Alternatively, reducing/increasing the magnitude of rewards may also help 
+        if converging too quickly/slowly.
+        Entropy curves that step-change dramatically are usually 
+        downstream of an issue with the problem formulation (i.e., obs or action 
+        space), learning rate, gradient norms or a bug in the implementation.
+
+Rewards (beyond “going up”)
+    Is the agent favoring a single component of the reward function 
+    (i.e. velocity vs L2 action magnitude)?
+        Reason: It may be the case that one of the components of the reward function 
+        is “easier” to optimize and so an agent will find the behavior as a local 
+        optima.
+        Prescription: In addition to tuning coefficients of reward components, it 
+        may also make sense to use the product of components instead of the sum. 
+        Tracking the stats w.r.t. each reward component may also yield insight. 
+        Alternatively, if some components are considered ‘auxiliary’, decaying the 
+        weight over time may be helpful.
+
+
+    Is the task horizon extremely long?
+        Reason: Credit assignment (i.e., attributing future/value rewards to past state/actions) becomes more difficult with the time between action and corresponding reward. In sparse reward environments, this can be a source of training inefficiency requiring many interactions with the environment.
+    
+        Prescription: Adding intermediate rewards (like lunar landing) for behaviors that are instrumental to the final goal can greatly increase training speed (e.g., in a soccer environment, an intermediate reward for kicking the ball will increase the likelihood that an agent discovers scoring a goal is rewarding). This may create undesired optima though as exploiting the intermediate reward may unintentionally be more valuable than the true reward or lead to undesired idiosyncratic behaviors. One can decay the value of this intermediate reward to zero using a step or reward based curriculum. Alternatively, if there are many subtasks, one can use a hierarchical or options based framework where individual policies are learned for different subtasks (e.g., kicking, passing, running) and then a higher level agent selects from these low level policies as its action space. Note, this issue may also fall under the “Exploration” section and require explicit exploration mechanisms such as the Intrinsic Curiosity Module.
+    
+    Are your rewards normalized/standardized?
+        Reason: Rewards of magnitudinally larger scale will dominate smaller rewards. Additionally, if per timestep rewards get really large, the targets for value functions will become huge as they are the sum of the per timestep rewards, td loss will become very large resulting in large update.
+    
+        Prescription: In general, keeping rewards between [-1,1] is good practice. Alternatively, you can use running mean/std instance normalization
+    
+
+Exploration
+    Is value loss going up early in training?
+        Reason: Typically, at initialization value estimates are ~0.0. Early in training, an agent will likely be encountering new, unseen extrinsic as it explores and so the value estimates will be wrong and loss goes up.
+
+        Prescription: Increasing exploration via intrinsic rewards (reward for exploring) or entropy bonuses (added to objective function to increase exploration). Alternatively, making the reward function denser by adding intermediate rewards (if rewards are sparse)
+
+    Are actions (roughly) uniformly/normally random early in training?
+        Reason: If no priors are used, a freshly initialized network should be near random. This is important for an agent to achieve proper exploration.
+
+        Prescription: Check the policy network is initialized appropriately and that policy entropy doesn’t drop really quickly.
+
+    Are intrinsic rewards decaying as learning progresses in a singleton task?
+        Reason: Intrinsic rewards are meant to encourage exploration, typically by some measure of novelty. As an agent explores, the value of additional exploration (or revisiting previously explored state-actions) is diminished as novelty decreases. Ideally, as intrinsic reward starts to go down, extrinsic reward should start to increase.
+
+        Prescription: Intrinsic rewards should be normalized. If the intrinsic reward has gone to 0 but the agent has not learned anything, one can try slow the dynamics of the intrinsic module (i.e., reduce the learning rate of Random Network Distillation or add noise).
+
+    Are episodic intrinsic rewards remaining constant or increasing as learning progresses in an episodic task?
+        Reason: Intrinsic rewards are meant to encourage exploration, typically by some measure of novelty. In episodic tasks, since novelty may not decrease (keeps finding new states) and exploratory behavior may actually improve, intrinsic rewards should remain constant or increase (to keep the incentive up to explore vs the higher rewards were seeing)
+
+        Prescription: Extrinsic reward should of course also increase. If that is not the case, it could mean that the two objectives are misaligned and that there is a trade off between the two. If such a trade off is unavoidable, then the extrinsic reward needs to have priority over the episodic bonus. Some ways to achieve this are to use a decaying schedule on the episodic bonus, have separate explore (with episodic bonus only) and exploit (with extrinsic reward only) policies and use the explore policy to generate more diverse starting states for the exploit policy or use behavioral cloning to bootstrap training. Also, intrinsic rewards should be normalized.
+
+
+Environment Dynamics
+    Can you train a low entropy forward dynamics and/or reward model (also useful for offline RL)?
+
+        Reason: The next state and rewards are used to generate targets for value learning in RL algorithms. If these are very noisy, then the targets will be noisy and learning may be slow or unstable. Environments may be inherently stochastic (i.e., random spawns of enemies), the formulation of the obs space may have a missing variable (i.e., a POMDP) or the dependence on the previous state may just be very loose to nonexistent.
+
+        Prescription: Depending on the source of the noise, it may be useful to revisit the observation formulation to be sure it includes all necessary information, a network architecture that can process the sequence of previous states rather than just the last state (i.e., LSTM, Transformer) or even use a Distributional RL algorithm to explicitly model the distribution of value (rather than just expected value).
+

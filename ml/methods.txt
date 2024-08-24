@@ -1,0 +1,14 @@
+Value Based Methods
+    Q-learning
+        Q(s,a)←Q(s,a)+α[r+γ * max_{a'}​Q(s′,a′)−Q(s,a)]
+        off-policy
+        guranteed to converge
+        discrete states
+        discrete actions
+        tabular state-action values
+    DQN
+        Q(s,a)←Q(s,a)+α[r+γ * max_{a'}​Q(s′,a′)−Q(s,a)]
+        off-policy
+        continuous state space
+        discrete action space
+        value-network and target-network

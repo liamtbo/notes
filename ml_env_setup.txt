@@ -1,7 +1,7 @@
 conda with python 3.11
 pytorch installed in conda with cuda
 vscode
-    sign in
+    sign in to github through vscode to avoid ssh
     ctrl-p, >, select python interpreter, choose conda
 
 selecting conda interpreter:
@@ -9,7 +9,7 @@ selecting conda interpreter:
 
 
 conda create --name env3.11 python=3.11 # gymnaiusm doesn't run on 12
-conda install -c pytorch torchvision cudatoolkit
+conda install pytorch torchvision torchaudio pytorch-cuda=11.8 -c pytorch -c nvidia
 pip install torchrl
 conda install pygame
 conda install gymnasium

@@ -6,6 +6,16 @@ exploding gradients
 vanishing gradients
     opposite of exploding
 
+value-based methods
+    focus on estimating the value of states or actions to derive the optimal policy.
+    The value function represents the expected cumulative rewards that can be obtained
+    from a state or state-action pair.
+policy-based methods
+    policy based methods direclty learn the policy that maps states to actions without
+    explicitly estimatiing value functions. The policy is parameterized and optimized
+    to maximize the expected rewards.
+
+
 large batch size (small if the opposite)
     generalization issues
         overfitting
@@ -44,6 +54,10 @@ sharp minima
 flat minima
     opposite of sharp minima
 
+
+
+
+
 policy gradient methods
     class of algos in RL used to directly optimize the policy
     not a value function like DQN
@@ -55,6 +69,16 @@ batch gradient descent
     using whole dataset to compute gradient
 stocastic gradient descent
     using a small batch to comppute gradient
+
+numerical instability
+    occus when small changes in input or operations lead to large and unpredictable
+    changes in the output of a computation
+
+location scaling (loc scaling)
+    scaling loc(mean) to reduce numerical instability
+    ex
+        moving loc of dis closer to 0 st that when tanh is applied, the output isn't
+        -1 or 1 (avoiding gradient vanishing/explosion)
 
 Actor-critic
     Policy (actor)
@@ -89,6 +113,10 @@ PPO
         L_ppo​(θ)=E[min(r(θ)⋅A(s,a),clip(r(θ),1−ϵ,1+ϵ)⋅A(s,a))]
     critic (value) network update
         Lcritic​(ϕ)=E[(Vϕ​(s)−Rt​)2]
+    Entropy bonus
+        encourages exploration
+        Ltotal​(θ)=L_ppo(θ)+β⋅Entropy
+        Entropy=−Et​[∑a​πθ​(a∣st​)logπθ​(a∣st​)]
 
 non-linearity
     functions
@@ -97,11 +125,14 @@ non-linearity
 activation functions
     reLU
     tanh
+        applies tanh to a normal dis output
+        for outputting action that are both bounded and continuous
+        used with loc scaling to reduce numerical instability
         non-linearity and activation
             allows neural network to learn more complex functions
             without non-linearility -> nn will be a linear model
         output range control
-            bounds outputs between [-1,1] - keeps values from growing too large or small (instability)
+            bounds outputs between (-1,1) - keeps values from growing too large or small (instability)
             symmetry around zero - helps when action space is continious and can be pos/neg
         gradient propagation
             suffers from vanishing gradient problem in deep nn
@@ -118,3 +149,24 @@ neural networks
         used in continuous action spaces, to ensure that the action values remain within 
         a specific range.
         adds non-linearity
+
+entropy (of policy)
+    measure of randomness or uncertainty in the actions taken by a policy
+entropy bonuses
+    bonuses added to agents objective function to encourage a higher level of randomness in action taking
+
+intrinsic reward
+    rewards given by agent to iteslf to encourage exploration
+episdic intrinsic rewards
+    rewards given at the end of an epsiode based on agents exploration behavior during the episode. Its meant to encourage the agent to explorer new or less frequently visited states
+forward dynamic model
+    model predicts next state of env given current state and action
+reward model
+    predicts the reward associated with a given state and action
+
+loss
+    huber loss (smooth_l1)
+        behaves like Mean Squared Error (MSE) for small differences and like 
+        Mean Absolute Error (MAE) for larger differences. This combination makes 
+        it more robust to outliers than MSE while being smoother than MAE, which 
+        can be beneficial in training stability.

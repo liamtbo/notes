@@ -40,7 +40,7 @@ from torch.optim import Adam
 
 from torchrl.objectives import DQNLoss, SoftUpdate
 
-loss = DQNLoss(value_network=policy, action_space=env.action_spec, delay_value=True)
+loss = DQNLoss(value_network=policy, action_space=env.action_spec)
 optim = Adam(loss.parameters(), lr=0.02)
 updater = SoftUpdate(loss, eps=0.99)
 
@@ -81,7 +81,8 @@ for i, data in enumerate(collector):
             total_count += data.numel()
             total_episodes += data["next", "done"].sum()
     # when cartpole can keep it up for over 200 steps, we've found a solution 
-    if max_length > 200:
+    print(max_length)
+    if max_length > 250:
         break
 
 t1 = time.time()
@@ -90,5 +91,7 @@ torchrl_logger.info(
     f"solved after {total_count} steps, {total_episodes} episodes and in {t1-t0}s."
 )
 
-record_env.rollout(max_steps=1000, policy=policy)
+# record_env.rollout(max_steps=1000, policy=policy)
+record_env.rollout(max_steps=2000, policy=policy)
+
 video_recorder.dump()

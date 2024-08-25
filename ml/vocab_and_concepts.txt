@@ -1,3 +1,11 @@
+advantage function
+    A(st​,at​)=Q(st​,at​)−V(st​)
+    a measure of how much brtter or worse and action a_t is compared to the average action the policy would take in s_t
+baseline
+    ∇θ​J(θ)=Eπθ​​[t=0∑T​∇θ​logπθ​(at​∣st​)⋅(Rt​−b(st​))]
+    value that is subtracted from the return or reward when calculating the policy gradient.
+    When baseline is the value function, it's the same as the advantage function
+
 gradient clipping
     used during the training of deep neural networks to prevent the exploding gradient problem
 exploding gradients
@@ -5,7 +13,6 @@ exploding gradients
     gradients become very large as parameters are multiplied through forward pass
 vanishing gradients
     opposite of exploding
-
 value-based methods
     focus on estimating the value of states or actions to derive the optimal policy.
     The value function represents the expected cumulative rewards that can be obtained
@@ -80,48 +87,12 @@ location scaling (loc scaling)
         moving loc of dis closer to 0 st that when tanh is applied, the output isn't
         -1 or 1 (avoiding gradient vanishing/explosion)
 
-Actor-critic
-    Policy (actor)
-        returns action based on policy and state
-    Value function (critic)
-        returns state and state-action value
-    A(s,a) advantage function
-        A(s,a) = Q(s,a) - V(s)
-
-rl algos
-    Base Actor critic
-    A2C
-    A3C
-    Proximal Policu Optimization (PPO)
-    DQN
-    Sarsa
-    Expected Sarsa
-    dyna-Q (+)
-    DDPG
-
-Advantage Actor-Critic A2C
-    actor (policy) gradient
-        ∇θ​J(θ)≈N1​∑i=0N​∇θ​logπθ​(ai​∣si​)⋅A(si​,ai​)
-    critic (value) gradient
-        ∇w​J(w)≈N1​∑i=1N​∇w​(Vw​(si​)−Qw​(si​,ai​))2
-
-PPO
-    actor-critic frameworks
-    use log prob instead of raw prob - more stable
-    actor (policy) network update
-        r(θ)= importance weights = π'θ​(a∣s) / πθ​(a∣s)​​
-        L_ppo​(θ)=E[min(r(θ)⋅A(s,a),clip(r(θ),1−ϵ,1+ϵ)⋅A(s,a))]
-    critic (value) network update
-        Lcritic​(ϕ)=E[(Vϕ​(s)−Rt​)2]
-    Entropy bonus
-        encourages exploration
-        Ltotal​(θ)=L_ppo(θ)+β⋅Entropy
-        Entropy=−Et​[∑a​πθ​(a∣st​)logπθ​(a∣st​)]
 
 non-linearity
     functions
         tanh
         ReLU
+        
 activation functions
     reLU
     tanh

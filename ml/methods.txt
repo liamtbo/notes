@@ -1,10 +1,19 @@
 Value Based Methods
+    focus on estimating the value function, which provides a measure of the expected return (or reward) from each state or state-action pair. These methods derive the policy indirectly by selecting actions that maximize the estimated values
+    pros
+        simple to implement and undersand
+        efficient in env where the state-action space is not too large
+    cons
+        struggle with high dimensional or continuous action spaces
+        struggle to handle complex policies well bc the policy is indirectly derived from the value function.
+
     Q-learning
         Q(s,a)←Q(s,a)+α[r+γ * max_{a'}​Q(s′,a′)−Q(s,a)]
         off-policy
         guranteed to converge
         discrete states
         discrete actions
+        replay buffs
         tabular state-action values
     DQN
         Q(s,a)←Q(s,a)+α[r+γ * max_{a'}​Q(s′,a′)−Q(s,a)]
@@ -12,3 +21,58 @@ Value Based Methods
         continuous state space
         discrete action space
         value-network and target-network
+        replay buffs
+        "walks close to cliff"
+    SARSA
+        Q(s,a)←Q(s,a)+α[r+γQ(s′,a′)−Q(s,a)]
+        on-policy
+        continuous state space
+        discrete action space
+        value-network and target-network
+        "takes farther, more safe, route from cliff
+
+Policy Based Methods
+    focus on directly optimizing the policy.
+    effective in high dim and stochastic continuous action spaces
+
+    REINFORCE (monte carlo family, policy gradient)
+        in order to maximize J(θ)=E_{πθ}​​[R(τ)] we use
+        ∇_{θ}​J(θ)=E_{πθ​​}[∇_{θ}​logπ_{θ}​(a_t​∣s_t​)⋅R_t​]
+        1. init params
+        2. generate entire trajectory (monte carlo style) τ=(s0​,a0​,r1​,…,sT​).
+        3. calculate return of trajectory R_t​=∑_{k=t}{T} ​γ^(k−t) * r_k
+        4. policy update θ←θ+α∇θ​J(θ)  θ ← θ+α∑{t=0}{T} ​∇_θ​ logπ_θ​(a_t​∣s_t​)⋅Rt​
+        5. repeat
+
+    Actor Critic (policy gradient)
+        actor chooses action, critic evaluates action
+        1. Initialize the actor network π(s;θ)π(s;θ) with parameters θ. Initialize the critic network V(s;w)V(s;w) with parameters w.
+        2. loop over episode time steps
+        3. actor network select action a_t based on s_t
+        4. execute action a_t in env, observe s_t+1 and r_t
+        5. critic evaluates advantage/TDerror function A_t δt​=rt​+γV(st+1​)−V(st​)
+        6. update critic (value function) w←w+αw​⋅δt​⋅∇w​V(st​;w)
+        7. update actor (policy) θ←θ+αθ⋅δt⋅∇θlog⁡π(at∣st;θ)
+        8. s_t = s_t+1
+        9. continue through episode
+    
+    Proximal Policy Optimization (PPO)
+        1.Initialize the actor network πθ​ with parameters θ.
+        Initialize the critic network V(s;w)V(s;w) with parameters w.
+        2. collect trajectories  {st,at,rt,st+1} using current policy π_θ
+        3. for each time step t in trajectories, comput advantae A_t
+        A_t​ = ∑{t'=t}{T​} γ^(t′−t) δ_t'​ where δt′= rt′+γV(st′+1;w)−V(st′;w)
+        4. optimize critic 
+            L_critic​(w)=1/N ​∑_t ​(V(st​;w)−Rt​)^2
+            w ← w − αw​⋅∇w​Lcritic​(w)
+        5. optimize actor
+            rt​(θ)=π_θ​(at​∣st​)​ / π_θold​​(at​∣st​)
+            L_actor​(θ)=1/N ​∑_t ​min(rt​(θ)⋅At​,clip(rt​(θ),1−ϵ,1+ϵ)⋅At​)
+            θ ← θ+αθ​⋅∇θ​Lactor​(θ)
+        6. update policy after optimizing over multiple epochs with mini-batches
+            θ_old​ ← θ
+            
+
+
+
+

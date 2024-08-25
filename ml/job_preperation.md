@@ -15,12 +15,12 @@
 
 - [x] **Markov Decision Processes (MDPs):** Understand states, actions, rewards, transition probabilities, and policies.
 - [x] **Value-Based Methods:** Study algorithms like Q-learning, SARSA, and Deep Q-Networks (DQN).
-- [ ] **Policy-Based Methods:** Learn about REINFORCE, Policy Gradient, Actor-Critic methods, and Proximal Policy Optimization (PPO).
+- [x] **Policy-Based Methods:** Learn about REINFORCE, Policy Gradient, Actor-Critic methods, and Proximal Policy Optimization (PPO).
 - [x] **Model-Free vs. Model-Based RL:** Understand the differences and use cases for each approach.
 
 # Advanced RL Topics
 
-- [ ] **Exploration-Exploitation Trade-off:** Learn about strategies like epsilon-greedy, softmax, and upper-confidence-bound (UCB).
+- [x] **Exploration-Exploitation Trade-off:** Learn about strategies like epsilon-greedy, softmax, and upper-confidence-bound (UCB).
 - [x] **Function Approximation:** Study how neural networks are used for approximating value functions and policies.
 - [x] **Temporal-Difference Learning:** Deepen your understanding of TD methods and how they are applied in RL.
 - [ ] **Multi-Agent RL:** Explore scenarios where multiple agents interact within an environment.

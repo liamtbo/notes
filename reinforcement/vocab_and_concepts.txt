@@ -141,3 +141,30 @@ loss
         Mean Absolute Error (MAE) for larger differences. This combination makes 
         it more robust to outliers than MSE while being smoother than MAE, which 
         can be beneficial in training stability.
+
+MARL
+    non-centralized environment
+        each agents policy can change over time as it learns, leading to a non-stationary env from the perspective and of individual agent. 
+    decentralised execution
+        policy for a single agent will output an action for that egent based only on its observation
+
+    decentralized critic
+        each agents critic evaluates the value of actions based only on the local observations and the actions of that agent.
+        Can suffer from learning instability due to the non-stationarity introduced by other agents policies
+        Useful when agents need to act bsed on limited info, or when systems scale makes centralized approaches impractical
+    centralied critic
+        helps mitigate the issue of non-stationarity in MARL
+        Each agent has a critic that has access to the global state and the actions of all agents.
+        Allows ciritc to evaluate the value of action more accurately
+        Agents will learn more stable and consistent value functions.
+        During execution, the policies become decentralised
+    
+    frameworks for critic
+        MAPPO
+            critic is centralized and take as input the global state of the system
+        IPPO
+            critic is decentralised
+            critic takes as input the observation of the respective agent, exactly like the policy. 
+
+    vectorization
+        process of running multiple instances of an env in parallel

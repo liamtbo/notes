@@ -1,17 +1,10 @@
-from collections import defaultdict
+import torch
 
-# Initialize a defaultdict with lists as default values
-logs = defaultdict(list)
+a = torch.tensor([1,2,3,4], dtype=torch.float, requires_grad=True)
+b = torch.tensor([5,6,7,8], dtype=torch.float, requires_grad=True)
+c = a * 5
+e = b * 5
+d = (c+e).sum()
 
-# Adding some data
-logs['info'].append('This is an info message.')
-logs['error'].append('This is an error message.')
-logs['warning'].append('This is a warning message.')
-
-# Accessing the data
-print(logs['info'])    # Output: ['This is an info message.']
-print(logs['error'])   # Output: ['This is an error message.']
-print(logs['warning']) # Output: ['This is a warning message.']
-
-# Accessing a non-existent key returns an empty list
-print(logs['debug'])   # Output: []
+d.backward()
+print(a.grad)

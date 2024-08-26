@@ -172,6 +172,7 @@ for i, tensordict_data in enumerate(collector):
         for _ in range(frames_per_batch // sub_batch_size):
             subdata = replay_buffer.sample(sub_batch_size)
             loss_vals = loss_module(subdata.to(device))
+            # same as calculatng grad for each singularyl 
             loss_value = (
                 loss_vals["loss_objective"]
                 + loss_vals["loss_critic"]

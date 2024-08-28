@@ -1,0 +1,11 @@
+supervised learning
+    use decision trees if
+        need simple, interpretable model
+        smaller dataset
+        quick and easy baseline model
+        problem doesn't require capturing complex patterns
+    use neural networks if
+        problem is complex and requires capturing intricate relationships
+        large, high dim datasets
+        sufficient computational resources
+        interpretability is less concerning

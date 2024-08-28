@@ -1,0 +1,44 @@
+when data is 2d, soft margin is a line measured from 2 chosen points
+when data is 3d, support vector classifier forms a plane
+margin 
+    shortest distance between the observations and the threshold is called the margin
+maximal margin classifier threshold (data split down the middle)
+    when we use the threshold that give ust he largest margin to make classifications.
+    This would be placing the threshold in the middle of two observation that are on the closest edges of their respective distributions.
+    In other words, mmc is super sensitive to outliers in the training data
+soft margin classifier (support vector classifier) (data split down the middle)
+    allows misclassifications
+    uses a soft margin to determine the location of a threshold
+how do we know that soft margin a is better then soft margin b?
+    use cross validation to determine how  many misclassification and observations to allow inside of the soft margin to get the best classification 
+
+support vector classifier
+    classifies group of data
+
+support vector machines
+    when we have 2 categories but no obvious linear classifier that seperates them in a nice way
+    works by moving the data into a relatively high dim space
+    and find a relatively high dim support vecto classifier that can affectively classify the observations
+
+    1. start with data in a relitively low dimension
+    2. move data into a higher dim
+    3. find a support vector classifier that seperates the higher dimensional data into two groups
+
+    how do we decide how to transform data into higher dim?
+        use kernal function to systematically find support classifiers in higher dimensions
+        ex: 1 dim -> polynomial kernal (squared) -> to get 2 dim, where support vector classifier can work
+
+    polynomial kernal
+        systematically increases dims by setting d, the degree of the polynomial and the relationships between each pair of observations are used to find a support vecotr multiplier
+
+        parameter d = dimension
+        d = 1
+            computes relationship between each pair of observations in 1-dim
+            these relationships are used to find a support vector classifier
+        d = 2
+            we get a 2nd dim based on observations^2
+            polynomial kernal computes the 2-dim relationships between each pair of observations
+        d = 3
+            observations^3 ...
+
+

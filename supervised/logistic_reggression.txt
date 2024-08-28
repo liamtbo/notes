@@ -1,0 +1,12 @@
+linear regression
+    computes linear relationship between the dependent variable (y) and one or more independent features (x) by fitting a linear equation to observed data.
+simple linear regression
+    one independent features
+    y=β0​+β1​X
+multiple linear regression  
+    mult independent features
+    y=β0​+β_1 * ​X_1 + β_2 ​* X_2 +………βn​Xn
+        Y is the dependent variable
+        X1, X2, …, Xn are the independent variables
+        β0 is the intercept
+        β1, β2, …, βn are the slopes

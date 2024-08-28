@@ -1,0 +1,28 @@
+bias
+    an error that occurs due ot overly simplistic assumptions or erroneous assumptions in the learning algorithm. If you use bias, it can lead to the model underfitting your data with low predictive accuracy
+    linear regression -> high bias
+    squigly line -> low bias
+
+variance
+    an error due to complexity in the learning algorithm. In variance, your data gets highly sensitive to high degrees of variation, leading your model to overfit the data. You'll end up carrying noise from your training data for your model to be useful for your test data.
+
+
+cross validation
+    allows us to compare different machine learning methods and get a dense of how well they will work in practice
+    trains model on first 75%, tests with last 25% of data
+    trains model on first 50% and last 25%, tests with middle 25% of data
+    trains model on first 25% and last 75%, tests with middle 25% of data
+    trains model on first 25%, tests with last 75% of data
+    do this with all methods (logistic regression, SVM, K-nearest neighbors)
+    chose methods with best cumulative results of tests
+    
+    ten-fold cross validation most common
+    can also be used for tuning hyper params
+
+
+
+
+variance
+    the difference in fits of the ml method between data sets
+    linear regression -> low variance
+    squigly line -> high variance on test data

@@ -19,9 +19,6 @@ cross validation
     ten-fold cross validation most common
     can also be used for tuning hyper params
 
-
-
-
 variance
     the difference in fits of the ml method between data sets
     linear regression -> low variance

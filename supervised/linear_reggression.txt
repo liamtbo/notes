@@ -1,0 +1,52 @@
+linear regression
+    computes linear relationship between the dependent variable (y) and one or more independent features (x) by fitting a linear equation to observed data.
+simple linear regression
+    one independent features
+    y=β0​+β1​X
+multiple linear regression  
+    mult independent features
+    y=β0​+β_1 * ​X_1 + β_2 ​* X_2 +………βn​Xn
+        Y is the dependent variable
+        X1, X2, …, Xn are the independent variables
+        β0 is the intercept
+        β1, β2, …, βn are the slopes
+
+Cost function(J)= 1/n ​∑_{i=1}{n} ​(y^_i^ ​− y_i​)^2
+
+line-of-best fit: Y^=θ_1​+θ_2​X
+gradient descent on differentiated cost wrt  θ_1 and θ_2
+
+assumptins of linear regression
+    linearity
+    independence
+        observation in data are independent of one another
+    homoscedasticity
+        across all levels of the independent variable(s), the variance of the errors is constant
+    nomrality
+        the residuals should be normally distributed
+
+L1 Regularization (Lasso Regression):
+
+    Description: L1 regularization adds a penalty equal to the absolute value of the magnitude of coefficients. This is often used when you want to enforce sparsity in your model, meaning it can effectively reduce the number of features by setting some coefficients to zero.
+    Cost Function:
+    Cost=MSE+λ∑i=1n∣βi∣
+    Cost=MSE+λi=1∑n​∣βi​∣ where λ is the regularization parameter that controls the strength of the penalty, and βiβi​ are the model coefficients.
+    Application: Often used in situations where feature selection is important, such as in high-dimensional data where reducing the number of features can improve model interpretability.
+
+L2 Regularization (Ridge Regression):
+
+    Description: L2 regularization adds a penalty equal to the square of the magnitude of coefficients. This discourages large coefficients by shrinking them, but it does not force any coefficients to be exactly zero.
+    Cost Function:
+    Cost=MSE+λ∑i=1nβi2
+    Cost=MSE+λi=1∑n​βi2​ where λ is the regularization parameter.
+    Application: Used to prevent overfitting by penalizing large coefficients, which can help stabilize the model when dealing with multicollinearity or when the number of features is large.
+
+R^2
+    R2 measures how well the independent variables explain the variance of the dependent variable in a regression model. It ranges from 0 to 1:  
+        R2=0R2=0 means no explanatory power.    
+        R2=1R2=1 means perfect explanatory power.
+    Simple Linear Regression: R2R2 is the square of the Pearson correlation coefficient rr between the independent and dependent variables, directly indicating the strength of the linear relationship.
+        R2=r2
+        R2=r2
+        
+    Multiple Linear Regression: R2R2 reflects the overall fit of the model, not the correlation between individual independent variables and the dependent variable.

@@ -88,3 +88,11 @@ add, commit
 git push origin new-branch
 * compare pull-req on github *
 merge pull requests if approved and delete new-branch
+
+connecting to github from terminal
+    ssh-keygen (in terminal)
+    cd ~/.ssh
+    ll
+    cat id_rsa.pub
+    go into github settings -> ssh/https -> add key
+    git clone github@github...

@@ -1,0 +1,63 @@
+detecting patterns in images
+
+cnn architecture
+    input layer
+    conv layer
+        applies filters to input image to extract features
+    pooling layer
+        downsamples the image to reduce computation
+    fully connected layer (dense)
+        makes final prediction
+    output layer
+
+    network learns optimal filters through backpropagation and gradient descent
+
+
+conv layer
+    need to specify how many filter (matrix) we need the model to have
+    image input has dim h x w x channel (channel usually is 3 for rgb)
+    convolution
+        filter will slide over every patch of pixles, outputting a k-dim tensor
+        results in a new image with new dim w' x h' x k
+    Diff filters will catch different features of the image, such as left edges, right edges, ect.
+    
+    conv layer consists of a set of learnabale filters (kernals) having small width and heigh with same depth as input volume (3 if rgb image).
+    forward pass
+        slide each filter across the whole input volume by stride and compute dot product between kernal weight and path from input volume
+    as filters slide we'll get a 2-D output for each filter and we'll stack them together as a result - output volume has depth equal to num of filters
+    The network will learn all the filters
+
+layers used to build convnets
+    input
+    conv layer
+        extract features with filters
+    activation layer
+        adds non-linearity
+    pooling layer
+        reduce size of volume - faster computation and less overfitting
+    flattening layer
+        flatten resulting feature map into one-dim vector so it can be passed to a dense layer for categorization or regression
+    dense layer
+        computes final classification or regression task
+    output layer
+        passes output into logisitc function for classification tasks like sigmoid or softmax
+
+padding
+    adding extra pixels around the edges of an image
+    why padding is used
+        preserves spatial dims
+            output of conv op is usually smaller then input, padding can help preserve original input size
+        preventing info loss at the edges
+            Without padding, pizels near edges of an image are involved in fewer conv ops compared to those in center. This can lear to a loss of info at the borders.
+        controlling output size
+        
+pooling layers
+    reduce the dim of the conv layer output
+    not learened params
+    2 kinds
+        max pool
+        avg pool
+
+channels
+    diff dims or layers of data that hold diff types of info for each pixels
+    ex: each pixel has rbg, so 256x256 image would have tensor 256x256x3

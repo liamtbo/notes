@@ -1,0 +1,8 @@
+random forest (decision trees)
+    1. create a bootstrapped dataset
+    2. create a decision tree using the bootstrapped dataset, but only use a random subset of variable (or columns) at each step. Example is picking two randomm columns, seeing which one does better at predicting, choosing that col
+    3. go back to step 1 and repeat (100's of times)
+    4. bootstrap sample data to train decision trees
+    5. use out-of-bag samples to test random forest
+    6. after running data down trees in random forest we see which option (yes/no) had more votes
+    7. compare results of steps 1-6 with forests built with diff number of vairables used per step

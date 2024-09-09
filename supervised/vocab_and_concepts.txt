@@ -3,10 +3,6 @@ bias
     linear regression -> high bias
     squigly line -> low bias
 
-variance
-    an error due to complexity in the learning algorithm. In variance, your data gets highly sensitive to high degrees of variation, leading your model to overfit the data. You'll end up carrying noise from your training data for your model to be useful for your test data.
-
-
 cross validation
     allows us to compare different machine learning methods and get a dense of how well they will work in practice
     trains model on first 75%, tests with last 25% of data
@@ -19,7 +15,11 @@ cross validation
     ten-fold cross validation most common
     can also be used for tuning hyper params
 
+ensemble methods
+    ensemble is a group of elementes viewed as a whole rather than individually.
+    ensemble method creates multiple models and combines them to solve a problem
+
 variance
-    the difference in fits of the ml method between data sets
-    linear regression -> low variance
-    squigly line -> high variance on test data
+    an error due to complexity in the learning algorithm. In variance, your data gets highly sensitive to high degrees of variation, leading your model to overfit the data. You'll end up carrying noise from your training data for your model to be useful for your test data.
+
+

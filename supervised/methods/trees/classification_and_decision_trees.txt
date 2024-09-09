@@ -1,0 +1,12 @@
+true -> go to right
+false -> go to left
+
+classification trees
+    discrete category in each leaf
+    1. pick root node feature (col)
+        take each feature and create two leaves off of it, each leaf has yes and no wrt dependent variable and fill it out
+        lowest gini impurity becomes root node
+    2. pick left node feature by taking samples that said True to root node (bc left node) and passing those into the remaining features. Out of those choose feature with lowest gini impurity as the root->left node
+    3. do same thing with root->right node
+    4. do recursively until all leaves are pure
+    5. output values for each leaf node are the majority

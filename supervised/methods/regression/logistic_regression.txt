@@ -1,0 +1,17 @@
+used for binary classification where we use the sigmoid function that takes input as independent variable and produces a probability value between 0 and 1
+
+
+types of logistic regression
+    binomial
+        true false
+    multinomial
+        cat dog sheep
+    ordinal
+        low medium high
+
+assumptions of logistic regression
+    independent observations
+    binary dependent vars
+    linearity relationship between independent vars and log odds
+    no outliers
+    large sample size

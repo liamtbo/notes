@@ -1,0 +1,15 @@
+what is polynomial regression?
+    relationship between the independent variable and dependent variables are modeled in the nth degree polynomial
+
+    models are fit using the least square method
+
+    special case of Linear Regression where we fit the polynomial equation on the data with a curvilinear relationship between the dependent and independent variables.
+
+assumptions of polynomial regression
+    relationship between dependent and independent is linear of curvilinear
+    independent vars are independent of each other
+    errors are independent, normally ditributed
+
+cost function
+    mean squared error
+gradient desent wrt coefficients

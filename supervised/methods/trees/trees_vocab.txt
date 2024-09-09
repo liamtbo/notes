@@ -1,0 +1,37 @@
+
+bagging
+    bootstrapping the data plus using the aggregate to make a decision
+
+bootstrapped dataset
+    random samples from original dataset with replacement (copies)
+clipping
+    when leaf hasn't had enough samples for confidence, so remove it
+
+decision trees
+    tree-like model used for making decision or predictions
+
+gini impurity
+    gini impurity for bool vals
+        done for each leaf
+        gini impurity = 1 - (prob of yes)^2 - (prob of no)^2
+    gini impurity for continuous values (ex: age)
+        sort cols
+        calculate the average age between each two adjacent rows
+        calculate total gini impurtity for each average age
+            left is less then age 9.5, right is above age 9.5
+        pick avg age with least gini impurity to be threshold for node
+    total gini impurity (bc sample size of each matters)
+        gives us the total gini impurity of the featutre and used to compare against other features for spot in current node
+        = (left sample count / left and right sample count) * left gini impurity + (right sample count / left and right sample count) * right gini impurtiy
+
+impure
+    refers to the measure of how mixed or heterogeneous the target class labels are in a given node. Quantifies how well a node can seperate the classifies
+    ex: gini impurity, entropy, information gain
+
+out-of-bag dataset
+    data that was not included in the bootstrapped dataset
+
+regression trees
+    predicts numeric values
+
+

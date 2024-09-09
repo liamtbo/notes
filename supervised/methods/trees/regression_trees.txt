@@ -1,0 +1,13 @@
+each leaf represents numeric value
+ex:
+    if dosage < 14.5
+        4.2% effective
+    else:
+        if dosage >= 29 ...
+
+root node
+    for each feature col
+        try different thresholds and choose the threshold with smallest diff between observed and predicted (sum of squared residuals)
+    feature with smallest sum of squared residuals becomes root
+    keep comparing all feature cols ssr's for each node
+stop creating thresholds when sample count is less then a certain amount

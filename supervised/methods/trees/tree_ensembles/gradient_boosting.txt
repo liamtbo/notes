@@ -1,0 +1,56 @@
+AdaBoost
+    forest of stumps
+        lots trees that are just a node with two leaves
+    some stumps get more say in the final classification then others (unlike random forest)
+    tree order creation is important
+        unlike random forest
+        errors the first stump makes influences the errors the seconds stumps makes and so on
+    
+    first stump
+        find the feature col with the lowest gini index
+    sample weight of stump
+        the weight of the stump in the final calculation is dependent on how accurate it classifies the data
+        Total error for a stump is the sum of weights associated with the incorrectly classified samples after running them
+            each sample has weight 1 / (num of samples) to start with
+            total error = 0 for perfect stump
+            total error = 1 for the worse stump
+        stump amount of say = 1/2 * log_e((1-total error) / total error)
+            higher total error -> stump say = (-)
+            low total error -> stump say = (+)
+
+        increase sample weight of every sample that was guessed incorrectly by first stump
+            new sample weight = (sample weight) * e^(amount of say)
+        decrease all other sample weights
+            new sample weight = (sample weight) * e^(-amount of say)
+        normalize all updated weights so they sum to 14
+    if we have a weighted gini function, 
+        use it with the new sample weights
+    else
+        treat the new sample weights as a distriubtion and sample data from it, creating a new data set thats the same size as the original
+        use this data set to choose second stumps feature (with gini impurity?)
+
+    when using testing data
+        if sum of stumps amount of say for classification 1 > sum of stumps amount of say for classifcation 0, 1 is the classification
+    
+gradient boost
+    builds fixed size trees based on the previous trees errors
+    each tree can be larger then a stump
+    all trees are scaled by same amount
+    can choose max number of leaves (8, ..., 32)
+    
+    get avg of observed
+    ** pseudo residual calculated for every data point **
+    calculate pseudo residual_0 for each data sample
+        predicted_0 = avg observed
+        residual_0 = observed - predicted_0
+    create tree_0 with features
+        place data sample pseudo residual_0 in respective leaves
+        if > 1 residual_0 in leaf take average
+    calculate psudeo residual_1 for each data sample
+        predicted_1 = avg observed + lr * tree_0 residuals
+        residual_1 = observed - predicted_0
+    create tree_1 same was as tree_0 but with residual_1 in leaves
+    calculate psuedo residual_2 for each data sample
+        predicted_2 = avg observed + (lr * residuals_0) + (lr * residuals_1)
+        residual_2 = observed - predicted_2
+    repeat this process until we reach the max specified, or adding additional trees does not signifcantly reduce the size of the residuals

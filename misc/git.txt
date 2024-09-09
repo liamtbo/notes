@@ -11,7 +11,7 @@ git add <file>
 	adds file to staging area
 git commit -m "message"
 	committing staged files
-git log -oneline
+git log --oneline
 	shows commit history
 
 undoing things
@@ -70,21 +70,25 @@ local folder → repo
     git add ., git commit -m "first commit"
 	git push -u origin main
 		pushes to repo
-repo → local repo
-	create repo on github
-	copy clone/download link git clone ‹clone link>
-	git push origin < branch>
-	git remote
-	fetch, push info
 
 collaboration on github
-start in local master branch
-git pull origin master
-git checkout -b new-branch
-* edit branch *
-add, commit
-* do not merge on local master branch *
-* push branch so others can review code *
-git push origin new-branch
-* compare pull-req on github *
-merge pull requests if approved and delete new-branch
+    start in local master branch
+    git pull origin master
+    git checkout -b new-branch
+    * edit branch *
+    add, commit
+    * do not merge on local master branch *
+    * push branch so others can review code *
+    git push origin new-branch
+    * compare pull-req on github *
+    merge pull requests if approved and delete new-branch
+
+connecting to github from terminal
+    ssh-keygen (in terminal)
+    cd ~/.ssh
+    ll
+    cat id_rsa.pub
+    go into github settings -> ssh/https -> add key
+    git clone github@github...
+    * edit stuff *
+    git add .; git commit -m "update"; git push -u origin <branch>

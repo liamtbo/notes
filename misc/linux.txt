@@ -1,0 +1,30 @@
+problem
+    folder with subfolders full of images that I want to put all into one folder
+solution
+    find <parent path> -mindepth 2 -type f -exec mv -t <cuml folder path> {} +
+        find <parent path>
+            starting dir that find will search for files
+        -mindepth 2
+            ensures find only considers files that are insdie subdirs
+        -type f
+            tells find to only look for files
+        -exec mv -t <cuml folder path> {} +
+            -exec mv
+                executes mv
+            -t <cuml folder path>
+                target dir specification
+            {}
+                placeholder for each file found by find
+            +
+                tells find to pass multiple files paths at once to mv command (faster then one at a time)
+
+problem
+    how many file are in a folder
+solution
+    find <folder path> -type f | wc -l
+        find <folder path>
+            searches in folder specified
+        -type f
+            only files, not dirs
+        | wc -l
+            pipes output (list of files) to wc -l, which counts the number of lines, each representing a file

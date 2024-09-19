@@ -12,7 +12,6 @@ cnn architecture
 
     network learns optimal filters through backpropagation and gradient descent
 
-
 conv layer
     need to specify how many filter (matrix) we need the model to have
     image input has dim h x w x channel (channel usually is 3 for rgb)
@@ -26,6 +25,8 @@ conv layer
         slide each filter across the whole input volume by stride and compute dot product between kernal weight and path from input volume
     as filters slide we'll get a 2-D output for each filter and we'll stack them together as a result - output volume has depth equal to num of filters
     The network will learn all the filters
+    output size calculation
+        output size = ((inputsize - kernalsize + 2 x padding) / stride) + 1
 
 layers used to build convnets
     input
@@ -53,7 +54,10 @@ padding
         
 pooling layers
     reduce the dim of the conv layer output
+    reduced w & h, keeps k the same
     not learened params
+    max pooling output size calculation
+        outputsize = ((inputsize - kernalsize) / strid) + 1
     2 kinds
         max pool
         avg pool

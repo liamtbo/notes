@@ -43,12 +43,12 @@ git branch -d ‹branch name>
 git branch -D < branch name>
 	delete unmerged branch
 git checkout -b ‹branch name>
-	creates new branch and switches to it
+	creatoes new branch and switches to it
 	be mindful of what branch you're branching from!
 renaming branch
     git checkout old-branch-name
     git branch -m new-branch-name
-    git push origin new-branch-name
+   r git push origin new-branch-name
     git push origin --delete old-branch-name
     git push --set-upstream origin new-branch-name
 pushing new branch
@@ -92,3 +92,25 @@ connecting to github from terminal
     git clone github@github...
     * edit stuff *
     git add .; git commit -m "update"; git push -u origin <branch>
+
+problems and solution
+    problem
+        committed a file that was too large so couldn't git push
+    solutions
+        delete large file locally
+        git add .; git commit -m "deleted large file"
+        git reset --soft HEAD~<num of commits to commit before large-file commit>
+            moves head pointer back 3 commits while keeping all changed in working dir
+        git commit -m "squashed commit"
+            consolidated all the changed from the last 3 committs to a single new commit
+        git push --force
+            need to use --force because changed git history
+
+    problem
+        merging
+    solution
+        git config pull.rebase false
+        git pull
+            write out git commit comment for merge, ctrl + O (save), enter (file name), ctrl+X (exit nano)
+        git push
+    

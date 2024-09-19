@@ -62,9 +62,10 @@ import torch.nn.functional as F
 class Net(nn.Module):
     def __init__(self):
         super().__init__()
-        self.conv1 = nn.Conv2d(3, 12, 5)
-        self.pool = nn.MaxPool2d(2, 2) # pool the conv layers to reduce dim
-        self.conv2 = nn.Conv2d(12, 16, 5)
+        self.conv1 = nn.Conv2d(3, 12, 5) # input: 3 channels, output: 12 channels
+        # pool the conv layers to reduce dim
+        self.pool = nn.MaxPool2d(2, 2) # kerel: 2x2, stride:2
+        self.conv2 = nn.Conv2d(12, 16, 5) # input: 12 channels (from last conv2d) output: 16
         self.fc1 = nn.Linear(16 * 5 * 5, 120)
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, 10)

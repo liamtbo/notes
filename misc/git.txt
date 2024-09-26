@@ -114,3 +114,9 @@ problems and solution
             write out git commit comment for merge, ctrl + O (save), enter (file name), ctrl+X (exit nano)
         git push
     
+    problem
+        changed name of remote repo, need to change remote url in local git repo
+    solution
+        git remote set-url origin git@github.com:liamtbo/multithreaded_banking.git
+        git remote -v
+        git push

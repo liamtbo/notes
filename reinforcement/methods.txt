@@ -46,7 +46,7 @@ Policy Based Methods
 
     Actor Critic (policy gradient)
         actor chooses action, critic evaluates action
-        1. Initialize the actor network π(s;θ)π(s;θ) with parameters θ. Initialize the critic network V(s;w)V(s;w) with parameters w.
+        1. Initialize the actor network π(s;θ)π with parameters θ. Initialize the critic network V(s;w) with parameters w.
         2. loop over episode time steps
         3. actor network select action a_t based on s_t
         4. execute action a_t in env, observe s_t+1 and r_t

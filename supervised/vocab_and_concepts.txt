@@ -1,7 +1,17 @@
 bias
-    an error that occurs due ot overly simplistic assumptions or erroneous assumptions in the learning algorithm. If you use bias, it can lead to the model underfitting your data with low predictive accuracy
-    linear regression -> high bias
-    squigly line -> low bias
+    error introduced by trying to approximate complex real-world problems with a simplified model
+    high bias
+        underfitting
+        using linear regression to approximate data that has a non-linear relationship
+    low bias
+        overfitting
+
+bias-variance trade off
+    increasing model complexity generally decreases bias but increases variance and vice versa
+    high bias, low variance
+        simple models (linear regression) typically have a high bias and low variance because they are stable but may not capture the complexity of the data
+    low bias, high variance
+        complex models (deep decision trees, nn) tend to have low biad but high variance, which means they can model the training data well but might not generalize to new data
 
 cross validation
     allows us to compare different machine learning methods and get a dense of how well they will work in practice
@@ -20,6 +30,9 @@ ensemble methods
     ensemble method creates multiple models and combines them to solve a problem
 
 variance
-    an error due to complexity in the learning algorithm. In variance, your data gets highly sensitive to high degrees of variation, leading your model to overfit the data. You'll end up carrying noise from your training data for your model to be useful for your test data.
+    the model's sensitivity to small fluctation in the training data
+    high variance
+        overfitted
+        model learned the noise in the training set and output changes durastically with changes in data set
 
 

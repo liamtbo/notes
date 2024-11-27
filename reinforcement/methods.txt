@@ -1,3 +1,13 @@
+Error Calculations
+    TD Error
+        δ=r+γ⋅V(s′)−V(s)
+        or
+        δ=r+γ⋅max​_{a}Q(s′,a′)−Q(s,a) for DQN
+
+        TD error is based on the difference between the current Q(s,a) and the new estimeate based on reward r and the expected future reward γ⋅max⁡aQ(s′,a′)
+
+
+
 Value Based Methods
     focus on estimating the value function, which provides a measure of the expected return (or reward) from each state or state-action pair. These methods derive the policy indirectly by selecting actions that maximize the estimated values
     pros
@@ -46,19 +56,21 @@ Policy Based Methods
 
     Actor Critic (policy gradient)
         actor chooses action, critic evaluates action
-        1. Initialize the actor network π(s;θ)π with parameters θ. Initialize the critic network V(s;w) with parameters w.
-        2. loop over episode time steps
-        3. actor network select action a_t based on s_t
-        4. execute action a_t in env, observe s_t+1 and r_t
-        5. critic evaluates advantage/TDerror function A_t δt​=rt​+γV(st+1​)−V(st​)
-        6. update critic (value function) w←w+αw​⋅δt​⋅∇w​V(st​;w)
-        7. update actor (policy) θ←θ+αθ⋅δt⋅∇θlog⁡π(at∣st;θ)
-        8. s_t = s_t+1
-        9. continue through episode
+        1. Initialize:
+            Actor: π(s;θ)
+            Critic: V(s;w)
+        2. For each step in episode:
+            Select Action: at=π(st;θ)
+            Execute Action: Observe rt​, st+1
+            Critic Evaluation: Compute TD error δt=rt+γV(st+1;w)−V(st;w)
+            Update Critic: w←w+αw⋅δt⋅∇wV(st;w)
+            Update Actor: θ←θ+αθ⋅δt⋅∇θlog⁡π(at∣st;θ)
+            Update State: st=st+1
+        3. Repeat until episode terminates
     
     Proximal Policy Optimization (PPO)
         1.Initialize the actor network πθ​ with parameters θ.
-        Initialize the critic network V(s;w)V(s;w) with parameters w.
+        Initialize the critic network V(s;w) with parameters w.
         2. collect trajectories  {st,at,rt,st+1} using current policy π_θ
         3. for each time step t in trajectories, comput advantae A_t
         A_t​ = ∑{t'=t}{T​} γ^(t′−t) δ_t'​ where δt′= rt′+γV(st′+1;w)−V(st′;w)

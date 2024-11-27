@@ -5,9 +5,47 @@ ex:
     else:
         if dosage >= 29 ...
 
-root node
-    for each feature col
-        try different thresholds and choose the threshold with smallest diff between observed and predicted (sum of squared residuals)
-    feature with smallest sum of squared residuals becomes root
-    keep comparing all feature cols ssr's for each node
-stop creating thresholds when sample count is less then a certain amount
+1. Define the Problem (Input and Target Variables)
+
+    Identify the input features (predictor variables) and the target variable (the continuous value you want to predict).
+    The input features can be numerical or categorical, and the target variable is always continuous in regression.
+
+2. Select a Splitting Criterion
+
+    For a regression tree, the splitting criterion measures the variance (or a similar metric) in the target variable within each region. The goal is to minimize the variance in the target variable for the subsets created by each split.
+    The most common criterion is to minimize the Mean Squared Error (MSE):
+    MSE=1N∑i=1N(yi−y^)2
+    MSE=N1​i=1∑N​(yi​−y^​)2 where yiyi​ is the true value, y^y^​ is the predicted value (mean of the target variable in that region), and NN is the number of data points.
+
+3. Recursive Splitting (Growing the Tree)
+
+    Starting at the root node (with all the training data), evaluate all possible splits based on the input features and choose the one that results in the best reduction in MSE (or another loss function like variance).
+
+    For each potential split, compute the MSE before and after the split. The split that results in the lowest MSE (after the split) is chosen.
+
+    For a given feature XX, splitting at a value ss results in two subsets:
+        Left: X≤sX≤s
+        Right: X>sX>s
+
+    The objective is to minimize the sum of MSE across the two child nodes:
+    MSEsplit=NleftN×MSEleft+NrightN×MSEright
+    MSEsplit​=NNleft​​×MSEleft​+NNright​​×MSEright​
+
+    Repeat this process recursively for each node, splitting the subsets further until a stopping criterion is met (e.g., minimum node size or maximum depth).
+
+4. Stopping Criteria
+
+    To prevent overfitting, the tree should not grow indefinitely. You can stop the tree growth based on several criteria:
+        Maximum Tree Depth: Limit how deep the tree can grow. Deeper trees are more complex and can overfit.
+        Minimum Samples per Leaf Node: The tree stops splitting when a node contains fewer than a specified number of data points.
+        Minimum Variance Reduction: If the variance reduction from a split is below a certain threshold, stop splitting.
+
+5. Prediction
+
+    Once the tree is built, the predictions for new data points are made by traversing the tree from the root to a leaf node, following the conditions at each internal node.
+    When a leaf node is reached, the prediction for that region is the average value of the target variable for the training points that ended up in that node.
+
+6. Pruning the Tree
+
+    To improve generalization and prevent overfitting, you can prune the tree. Pruning removes nodes or sub-trees that contribute little to predictive accuracy.
+    Cost-complexity pruning is a common method where a penalty is applied for tree complexity (measured by the number of terminal nodes or depth), and branches are removed if they don’t contribute significantly to reducing the error.

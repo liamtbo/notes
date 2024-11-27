@@ -1,0 +1,15 @@
+multinomial naive bayes classifier
+spam and ham (not spam) messages
+make histograms or each word in the ham messages
+calculate probabilites of each word for ham and spam
+    # times word in ham messages / total words in ham messages
+
+training data: 8 hams, 4 spams
+initial guess new message is ham = 8/12
+initial guess new message is spam = 4/12
+new message = "Dear Friend"
+prob new message is ham = p_{ham}(N) * p_{ham}(Dear | ham) * p_{ham}(Friend | ham)
+prob new message is spam = p_{spam}(S) * p_{spam}(Dear | spam) * p_{spam}(Fried | spam)
+if prob_ham > prob_spam -> new message is ham
+
+if a word appears in the new message that didn't exist in the training data its prob will be 0 and make the whole calc equal to 0. solution is to add 1 to every word in histograms

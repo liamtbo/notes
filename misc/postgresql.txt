@@ -1,0 +1,104 @@
+
+
+
+create /server/.env file with the following information
+        DB_USER=liam
+        DB_HOST=localhost
+        DB_NAME=stocks
+        DB_PASSWORD=peanut
+        DB_PORT= 5432
+
+start psql service
+    sudo systemctl start postgresql
+
+connect to postgresql as postgres user
+    sudo -u postgres psql
+
+create user if you need to give them specific permissions (OPTIONAL)
+    CREATE USER liam WITH PASSWORD 'peanut';
+
+grand priveleges to new user
+    ALTER USER liam CREATEDB;
+
+creating database
+    CREATE DATABASE my_database;
+    \l
+        lists all databases
+    \c  my_database
+        connect to database
+    \dt
+        see what database you're connected to
+    
+
+creating tables
+    CREATE TABLE cars (
+        brand VARCHAR(255),
+        model VARCHAR(255),
+        year INT
+    ); 
+
+    CREATE TABLE customers (
+        customer_id SERIAL NOT NULL PRIMARY KEY,
+        customer_name VARCHAR(255),
+        contact_name VARCHAR(255),
+        address VARCHAR(255),
+        city VARCHAR(255),
+        postal_code VARCHAR(255),
+        country VARCHAR(255)
+    ); 
+    
+    SERIAL NOT NULL PRIMARY KEY
+        used to auto-generate unique ints for a col to use as a primary key
+
+inserting values into table
+    INSERT INTO cars (brand, model, year)
+    VALUES ('Ford', 'Mustang', 1964); 
+
+inserting multiple rows of data
+    INSERT INTO cars (brand, model, year)
+    VALUES
+    ('Volvo', 'p1800', 1968),
+    ('BMW', 'M1', 1978),
+    ('Toyota', 'Celica', 1975); 
+
+select data
+    specifying cols
+        SELECT brand, year FROM cars;
+    returning all cols
+        SELECT * FROM cars; 
+
+Adding cols
+    ALTER TABLE cars
+    ADD color VARCHAR(255); 
+
+updating existing values in table
+    UPDATE cars
+    SET color = 'red'
+    WHERE brand = 'Volvo'; 
+
+updating multiple cols
+    UPDATE cars
+    SET color = 'white', year = 1970
+    WHERE brand = 'Toyota';
+
+altering table
+    changing data type
+        ALTER TABLE cars
+        ALTER COLUMN year TYPE VARCHAR(4);
+    changing max allowed chars
+        ALTER TABLE cars
+        ALTER COLUMN color TYPE VARCHAR(30);
+    
+dropping COLUMN
+    ALTER TABLE cars
+    DROP COLUMN color;
+
+deleting existing values
+    DELETE FROM cars
+    WHERE brand = 'Volvo';
+
+deleting all records
+    DELETE FROM cars;
+
+deleting/dropping tables
+    DROP TABLE cars;

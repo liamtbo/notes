@@ -61,6 +61,7 @@ if conflict
 	open conflict file, delete what you want removed including « = »
 	add, commit
 	pushing
+ 
 local folder → repo
 	create repo on github
     git init
@@ -93,6 +94,32 @@ connecting to github from terminal
     * edit stuff *
     git add .; git commit -m "update"; git push -u origin <branch>
 
+merge conflicts
+    click "accept current change", "accept incoming" ...
+    <<<<<< Head (current change)
+    ....
+    ======
+    ....
+    >>>>>> other-persons-merge (incoming change)
+
+    seeing base:
+        base - common ancestor of merge conflict
+        toggle into base with "resolve in merge editor" blue button
+        right box - your changes
+        left box - incoming changes
+        bottmom box - preview pannel
+        use top two boxes to build result (bottom) is what gets staged on your disk when completed
+        base - top right three dots
+
+    click complete merge to stage
+    aborting
+        command pallete: git abort merge
+
+git stash
+    stashing (saving) away changs you don't want to commit yet
+    good for switching branchs, pulling, ect.
+    git stash pop restores save
+
 problems and solution
     problem
         committed a file that was too large so couldn't git push
@@ -120,3 +147,5 @@ problems and solution
         git remote set-url origin git@github.com:liamtbo/multithreaded_banking.git
         git remote -v
         git push
+
+    

@@ -1,0 +1,6 @@
+
+
+Choice of ML model depends on three key factors:
+    size of dataset (small vs large)
+    structure of data (numerical, categorical, sequential, high-dimensional)
+    complexity of relationships (linear vs. non-linear)

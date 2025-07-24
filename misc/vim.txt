@@ -1,0 +1,26 @@
+sudo apt install vim
+
+Basic Modes in Vim
+    Normal Mode
+        Default mode for navigation and commands (press Esc to return to this mode).
+    Insert Mode
+        Allows you to insert text (press i to enter this mode).
+    Command Mode
+        For advanced commands like saving, quitting, or searching (type : in normal mode).
+
+Navigating
+    Move the cursor:
+        arrow keys
+    Jump words:
+        w: Next word
+        b: Previous word
+    Insert Text
+        i: Insert before the cursor
+
+Saving and Exiting
+    Save changes:
+        :w
+    Save and exit:
+        :wq
+    Exit without saving:
+        :q!

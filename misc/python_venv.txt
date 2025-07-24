@@ -1,0 +1,12 @@
+changes PATH vairables in terminal to point to python and pip
+inside virtual env specified
+
+sudo apt install python3.12-venv
+create venv
+    this install the venv inside the dir you're working in
+    "all of this projects depencies and versions are here"
+    python3 -m venv myenv
+activate venv
+    source <venv name>/bin/activate
+deactivate venv
+    deactivate

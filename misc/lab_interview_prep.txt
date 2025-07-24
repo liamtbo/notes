@@ -1,0 +1,34 @@
+1. Understand His Research Areas
+
+    Agent Reasoning/Planning: Review concepts like planning algorithms, decision-making under uncertainty, and reasoning frameworks in AI.
+    LLM-powered Agent Systems: Study how large language models (LLMs) are applied to agent-based reasoning, collaboration, and social simulation.
+    Graph Machine Learning: Refresh knowledge on graph-based data structures and their applications in machine learning, such as GNNs (Graph Neural Networks) and temporal/spatial graph learning.
+
+2. Your Background
+
+    Prepare to explain how your past projects (e.g., lunar landing DQN, CNN war vehicle classification) are relevant to his research.
+    Emphasize your interest and experience in reinforcement learning, multi-agent systems, and AI, linking it to his focus on reasoning/planning and graph AI.
+
+    lunar landing DQN
+    war vehicle classification CNN
+
+3. Explore Potential Collaborations
+
+    Think about possible research ideas at the intersection of your interests and his (e.g., using LLMs for multi-agent planning, graph-based modeling for agent interactions).
+    Review papers or resources on generative graph models or social simulation to suggest potential directions.
+
+4. Questions to Ask
+
+    What specific problems or projects are you currently focused on in the lab?
+    How does your lab approach the integration of LLMs and graph-based reasoning?
+    What qualities do you look for in a research intern?
+
+5. Brush Up on Technical Knowledge
+
+    Review key topics like Markov Decision Processes (MDPs), reinforcement learning strategies, and any algorithms relevant to agent reasoning/planning.
+    Familiarize yourself with recent advancements in LLMs, especially applications involving agents or collaboration.
+
+6. Prepare Logistical Points
+
+    Have your CV and transcripts ready if you haven’t sent them.
+    Be ready to discuss your availability and how you can contribute during the term.

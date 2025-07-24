@@ -1,0 +1,10 @@
+pandas
+    array of 0 to x -> [0,1,2,...,256]
+        np.arange(256)
+    see if null, nan, or None is in a data frame (checks all dimensions)
+        data.isnull().sum().sum()
+numpy
+
+pytorch
+    test if any element in input is True
+        torch.any(input)

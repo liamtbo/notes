@@ -1,10 +1,17 @@
-Error Calculations
+Misc
     TD Error
+        one-step approximation of the difference between the estimated return and the observed reward:
+
         δ=r+γ⋅V(s′)−V(s)
         or
         δ=r+γ⋅max​_{a}Q(s′,a′)−Q(s,a) for DQN
 
         TD error is based on the difference between the current Q(s,a) and the new estimeate based on reward r and the expected future reward γ⋅max⁡aQ(s′,a′)
+
+    General Advantage Function
+        A(st,at) represents how much better or worse taking a particular action at in st is compare dot the average action taken in that state
+
+        A(st​,at​)=Q(st​,at​)−V(st​)
 
 
 
@@ -73,18 +80,24 @@ Policy Based Methods
         Initialize the critic network V(s;w) with parameters w.
         2. collect trajectories  {st,at,rt,st+1} using current policy π_θ
         3. for each time step t in trajectories, comput advantae A_t
-        A_t​ = ∑{t'=t}{T​} γ^(t′−t) δ_t'​ where δt′= rt′+γV(st′+1;w)−V(st′;w)
-        4. optimize critic 
-            L_critic​(w)=1/N ​∑_t ​(V(st​;w)−Rt​)^2
-            w ← w − αw​⋅∇w​Lcritic​(w)
-        5. optimize actor
-            rt​(θ)=π_θ​(at​∣st​)​ / π_θold​​(at​∣st​)
-            L_actor​(θ)=1/N ​∑_t ​min(rt​(θ)⋅At​,clip(rt​(θ),1−ϵ,1+ϵ)⋅At​)
-            θ ← θ+αθ​⋅∇θ​Lactor​(θ)
+            General Advantage Function (GAE)
+                At​ = k=0∑∞​(γλ)^k δt+k​
+                δt′= rt′+γV(st′+1;w)−V(st′;w)
+            advantage is a smoothed out td error over multiple time steps to reduce variance but still capture bias.
+        4. optimize actor
+            use gradient descent on following surrogate objective
+            L(θ)=Et​[min(rt​(θ)At​^​,clip(rt​(θ),1−ϵ,1+ϵ)At​^​)]
+                rt​(θ)=πold​(at​∣st​) / πcurr​(at​∣st​)​
+                clipping makes sure rt​(θ) <= rt​(θ) <= 1+ϵ
+        5. optimize critic 
+            use gradient descent on following
+            LV​(θ)=Et​[(V(st​)−Rt​)2]
         6. update policy after optimizing over multiple epochs with mini-batches
             θ_old​ ← θ
             
-
+        surrogate objective refers to an approcimate of the objective
+            true policy gradient objective is the advantage-weighted expected return
+            However, this can lead to instability in training as large changes in policy may cause significant performance drop or even divergence
 
 
 

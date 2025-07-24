@@ -61,8 +61,24 @@ sharp minima
 flat minima
     opposite of sharp minima
 
+entity embeddings
+    useful for categorical variables in models where the relationships between categoreis can be learned and caputured
+    used to represent categorical data as continuous-valued vectors (dense)
+    maps each category or entity to a lower-dimensional vector space where similar categories are closer to each other in terms of their vector representation
+
+    how it works:
+        loop:
+            random init of vector of same size for every entity
+            vector for each entity passed through embedding layers
+            output for each is concatentated into one larger vector
+            larger vector passed into nn
+            backpropogate / gradient descent
+            goto loop
 
 
+continuous valued vectors (dense)
+    vectors in which the elements are real-valued numbers as opposed to discrete valued vectors
+    dense bc all of their elements contain meaningful, non-zero values, unlike spare vectors
 
 
 policy gradient methods

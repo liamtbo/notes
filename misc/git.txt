@@ -14,7 +14,7 @@ git commit -m "message"
 git log --oneline
 	shows commit history
 
-undoing things
+looking back to old commits
 git checkout ‹commit id>
 	look at code from previous commit (read-only)
 	git checkout < branch>
@@ -26,6 +26,8 @@ git revert < commit id›
 git reset < commit id>
 	--hard
 		doesn't retain in code in repo resets repo to a previous commit
+
+
 
 branches
 make sure to commit before switching branches
@@ -48,7 +50,7 @@ git checkout -b ‹branch name>
 renaming branch
     git checkout old-branch-name
     git branch -m new-branch-name
-   r git push origin new-branch-name
+    git push origin new-branch-name
     git push origin --delete old-branch-name
     git push --set-upstream origin new-branch-name
 pushing new branch
@@ -62,15 +64,25 @@ if conflict
 	add, commit
 	pushing
  
-local folder → repo
+new local folder → new personal repo
 	create repo on github
     git init
     git branch -M main # changes branch masters name to main
 	git remote add origin ‹repo link>
-		adds alias for repo link
+		"heres a remote repo i might pull/push too"
     git add ., git commit -m "first commit"
 	git push -u origin main
-		pushes to repo
+		pushes to repo and sets default to main branch
+
+new local folder -> others repo with previous commits
+    ensure .ssh key is in .ssh folder and agent setup
+    get ssh link of repo (code tabe)
+    open new local folder
+    git clone <shh of repo> .
+    git pull origin main
+    git add .
+    git commit -m "init comm"
+    git push -u origin main
 
 collaboration on github
     start in local master branch
@@ -118,7 +130,10 @@ merge conflicts
 git stash
     stashing (saving) away changs you don't want to commit yet
     good for switching branchs, pulling, ect.
-    git stash pop restores save
+    git stash
+    git checkout previous-commit-id
+    git checkout main
+    git stash apply
 
 problems and solution
     problem

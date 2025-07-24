@@ -1,0 +1,99 @@
+setup
+    sudo apt-get update
+    sudo apt install docker.io
+    sudo systemctl enable docker
+    sudo systemctl status docker
+    sudo system start docker
+    sudo docker run hello-world
+
+    sudo apt-get install docker-compose-v2
+
+    docker --version
+    docker compose version
+
+start Docker container in the background (detached mode)
+    go to folder wher docker-compose.yml file is
+    sudo docker compose up -d
+        up -> tell docker compose to create and start container in .yml
+        -d -> detached mode (container will run in background)
+
+bringinig down all docker containers
+    sudo docker stop $(sudo docker ps -q)
+
+list all running docker containers on system
+    sudo docker ps
+
+copying files from vm to docker
+    sudo docker cp a.out <container id>:/tmp
+
+finding IP/MAC/other info of container
+    sudo docker inspect <container ID>
+
+running commands inside a docker container
+    need access container OS by getting a shell inside the container
+    get container ID
+        sudo docker ps
+    start shell on container
+        docker exec -it <container ID> /bin/bash
+    leave cntainers shell
+        exit
+
+linux bridge
+    creates communication connection between host and docker network
+
+    [Container 1] eth0 <--> veth1 ----+
+                                    |
+    [Container 2] eth0 <--> veth2 ----+-- [docker0 bridge] <---> [Host Network]
+                                    |
+    [Container 3] eth0 <--> veth3 ----+
+
+
+example yml file
+    version: "3" // specifies docker compose file format version
+    services: // lists all services (containers) to be created and managed by docker compose
+        attacker:
+            image: handsonsecurity/seed-ubuntu:large // base image to use for container
+            container_name: seed-attacker // name of container
+            tty: true // allows interactive command line use
+            cap_add: // grants all linux kernal capabilities
+                    - ALL
+            privileged: true // container has elevated privileges allowing it to acces host resources directly (modfiy network settings)
+            // used to persist data outside of containers
+            volumes: // mounts a dir from host to the container
+                    - ./volumes:/volumes
+            network_mode: host // container shares hosts network stack (IP)
+        hostA:
+            image: handsonsecurity/seed-ubuntu:large
+            container_name: hostA-10.9.0.5
+            tty: true
+            cap_add:
+                    - ALL
+            networks: // connects container to a custom network (net-10.9.0.0)
+                net-10.9.0.0:
+                    ipv4_address: 10.9.0.5 // gives container fixed IP address
+            // starts service openbsd-inetd to simular a networked application or host
+            // and to keep containers running indefinitely
+            command: bash -c "
+                        /etc/init.d/openbsd-inetd start  &&
+                        tail -f /dev/null
+                    "
+        hostB:
+            image: handsonsecurity/seed-ubuntu:large
+            container_name: hostB-10.9.0.6
+            tty: true
+            cap_add:
+                    - ALL
+            networks:
+                net-10.9.0.0:
+                    ipv4_address: 10.9.0.6
+            command: bash -c "
+                        /etc/init.d/openbsd-inetd start  &&
+                        tail -f /dev/null
+                    "    
+    networks: // defines a custome network for the containers
+        net-10.9.0.0:
+            name: net-10.9.0.0 // names network
+            ipam: // IP Adress Management
+                config:
+                    - subnet: 10.9.0.0/24 // subnet IP range
+

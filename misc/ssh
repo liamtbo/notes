@@ -1,0 +1,10 @@
+keys live in ~/.ssh folder
+    ls -a
+
+generate keys
+    ssh-keygen -t rsa -b 4096 -C "liamtbo@gmail.com"
+add ssh key to ssh agent
+    ssh-add ~/.ssh/id_rsa
+    program that stores your private ssh keys securly in memory and manges authentiation on your behalf
+private key permissions
+    chmod 600 ~/.ssh/id_rsa

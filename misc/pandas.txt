@@ -1,0 +1,24 @@
+# import pandas module 
+import pandas as pd 
+  
+# making dataframe 
+df = pd.read_csv("nba.csv") 
+ 
+# output the dataframe
+print(df)
+
+# masking out rows
+df = df[df['col_name'] == 'example']
+
+# index locating
+value = df.iloc[row_i,col_i]
+row = df.iloc[row_i]
+df['col'].iloc[i]
+
+# conversion
+df['col_name'].to_list()
+df['col_name'].to_numpy()
+
+# concat row or columns of multiple df's
+pd.concat(objs: List[pd.DataFrame], axis=1) # stacking columns
+pd.concat(objs: List[pd.DataFrame], axis=0) # stacking rows

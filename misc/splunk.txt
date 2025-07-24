@@ -1,0 +1,22 @@
+Splunk is a data analytics and security company that specializes in processing and analyzing large volumes of machine-generated data. 
+Their platform helps organizations monitor, search, analyze, and visualize data in real-time, primarily for cybersecurity, IT operations, and observability.
+
+What Splunk Does:
+    Log Management & Analysis – Collects and indexes machine data from applications, servers, IoT devices, and security logs.
+    Security Information & Event Management (SIEM) – Detects and responds to cybersecurity threats using real-time analytics.
+    IT Operations & Observability – Monitors cloud infrastructure, applications, and networks to prevent downtime and performance issues.
+    AI & Machine Learning – Uses ML to detect anomalies, predict system failures, and automate responses.
+    Incident Response & SOAR (Security Orchestration, Automation, and Response) – Automates security workflows to respond to threats faster.
+
+Key Products
+    Splunk Enterprise – Core platform for analyzing log and machine data.
+    Splunk Cloud – Cloud-hosted version of Splunk Enterprise.
+    Splunk Observability Cloud – For application and infrastructure monitoring.
+    Splunk Security Solutions – SIEM, threat intelligence, and security automation tools.
+
+Company Values
+    innovative
+    passionate
+    disruptive
+    open
+    fun

@@ -27,8 +27,6 @@ git reset < commit id>
 	--hard
 		doesn't retain in code in repo resets repo to a previous commit
 
-
-
 branches
 make sure to commit before switching branches
 master branch

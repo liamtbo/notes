@@ -22,3 +22,20 @@ df['col_name'].to_numpy()
 # concat row or columns of multiple df's
 pd.concat(objs: List[pd.DataFrame], axis=1) # stacking columns
 pd.concat(objs: List[pd.DataFrame], axis=0) # stacking rows
+
+# add mapped values where they exists, otherwise nan
+label_map = dict(zip(keys, values))
+scaled_representations['new_values_col'] = scaled_representations['keys_col'].map(label_map)
+
+# Slice - a portion of a df or series you get by indexing or filtering
+df_slice = df[df['age'] > 30] # subset of original
+view vs copy
+    view is a ref to original - changes to it might affect original df
+    copy is independent - changes to it has no offect on original df
+Pandas doesn't tell you when you're getting a view or a copy when slicing
+    df_slice = df[df['col'] > 10]   # Might be a view
+    df_slice['new_col'] = 42        # ⚠️ SettingWithCopyWarning
+
+# max min
+    df.min()
+    df.max()

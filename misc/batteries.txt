@@ -1,0 +1,24 @@
+volts
+    cable speed
+amps
+    bandwidth
+watts
+    volts * amps = watts
+    total power
+mAh
+    milliampere-hour — it’s a measure of a battery’s capacity, or how much charge it can store.
+    milliampere (mA) = one-thousandth of an ampere (a measure of current)
+    hour (h) = time
+xS
+    battery pack has x cells connected in series.
+    S = Series (adds voltage, capacity stays the same)
+    Each LiPo (Lithium Polymer) cell is typically 3.7 V nominal (4.2 V fully charged).
+    3S = 3 × 3.7 V = 11.1 V nominal (12.6 V fully charged).
+c
+    C-rate
+    tells you how quickly a battery can safely charge or discharge relative to its capacity.
+    The C-rate is a multiplier of the battery’s capacity in amp-hours (Ah).
+    Current (A)=C×Capacity (Ah)
+    1C means you’re charging/discharging the battery in 1 hour.
+    2C means in 0.5 hours (twice as fast).
+    0.5C means in 2 hours (half as fast).

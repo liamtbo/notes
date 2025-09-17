@@ -27,6 +27,15 @@ git reset < commit id>
 	--hard
 		doesn't retain in code in repo resets repo to a previous commit
 
+added too large of a file and git push failed
+    git log --oneline # look at commits
+    git reset --soft HEAD~1 # move branch pointer one commit back & leave al file changes from those commits staged
+    git status # see what's staged, bad file should be seen in here
+    git reset # clear out staged area, but keep all edits
+    git add .
+    git commit -m "fixed"
+    git push -f # -force flag needed tot ell git to overwrite history on the remote (dangerous if other are working on the same branch)
+
 branches
 make sure to commit before switching branches
 master branch

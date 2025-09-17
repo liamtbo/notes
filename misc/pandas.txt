@@ -27,15 +27,38 @@ pd.concat(objs: List[pd.DataFrame], axis=0) # stacking rows
 label_map = dict(zip(keys, values))
 scaled_representations['new_values_col'] = scaled_representations['keys_col'].map(label_map)
 
-# Slice - a portion of a df or series you get by indexing or filtering
-df_slice = df[df['age'] > 30] # subset of original
-view vs copy
-    view is a ref to original - changes to it might affect original df
-    copy is independent - changes to it has no offect on original df
-Pandas doesn't tell you when you're getting a view or a copy when slicing
-    df_slice = df[df['col'] > 10]   # Might be a view
-    df_slice['new_col'] = 42        # ⚠️ SettingWithCopyWarning
-
 # max min
     df.min()
     df.max()
+
+# slice - copy on write
+mask = df['encoded'] == 5 # creates boolean array mask
+masked_df = df[mask] # 
+masked_df['new_col'] = range(len(masked_df))  # edits are made to the copy, does not affect orignal df
+
+# chained assignment
+    # violatation of Copy-on-Write (CoW) principles
+        df = pd.DataFrame({"foo": [1, 2, 3], "bar": [4, 5, 6]})
+        df["foo"][df["bar"] > 5] = 100 # df['foo'] is a view
+    
+# pandas view
+"""When you create a view of a DataFrame in Pandas, it creates a new object 
+    where the data attribute references the original data in memory. That means 
+    any changes made in the view reflect in the original DataFrame. """
+    
+import pandas as pd
+# Sample DataFrame
+df = pd.DataFrame({'A': [1, 2, 3], 'B': [4, 5, 6]})
+# Creating a view
+view_df = df[['A']]
+view_df['A'][0] = 99
+print(df)
+
+# pandas copy
+"""In contrast, when you create a copy of a DataFrame, it gets a separate instance in 
+memory. Any modifications made to the copy will not affect the original DataFrame."""
+
+copy_df = df.copy()
+copy_df['A'][0] = 99
+print(df)
+print(copy_df)

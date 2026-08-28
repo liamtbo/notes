@@ -1,0 +1,182 @@
+subscriber and publisher
+    publisher node writes messages to a topic
+    subscriber node to the topic and reads teh messages
+
+service and client
+    client node requests job from client
+    service node requests job from
+
+action server and client
+    like client-service architecture, but with feedback on process of action being created
+    custom-define actions 
+        consists of request, result, and feedback
+
+msg and srv interfaces
+    structure for msg (used for sub pub)
+    structure for srv (used for service client)
+
+package.xml
+    "what do I depend on?"
+
+CMakeLists.txt
+    "what do I build, and how?"
+
+rosdep
+    identfying and installing package dependencies
+    depends on the manually populated package.xml
+
+strucutre
+    ros2_ws/
+        build/
+        install/
+        log/
+        src/
+            package1/
+                CMakeLists.txt
+                include/mypackage/
+                package.xml
+                src/
+                    node1.py
+            package2
+                .../
+
+Every terminal should have same ROS2 Domain ID
+    export ROS_DOMAIN_ID=0
+    echo $ROS_DOMAIN_ID
+
+source ros 2 installation in every terminal running ros commands
+    source /opt/ros/kilted/setup.bash
+
+create a workspace
+    mkdir -p ~/ros2_ws/src
+
+if cloning repo
+    cd ~/ros2_ws/src
+    git clone https://github.com/ros/ros_tutorials.git -b kilted
+|
+|
+if creating a package
+    cd ros2_ws/src
+    ros2 pkg create --build-type ament_python --license Apache-2.0 package_name
+    # create nodes files
+        cd ros2_ws/src/package_name/package_name
+        make nodes
+    # add dependencies
+        cd ros2_ws/src/package_name/
+        # edit package.xml
+            # fill in <description>, <maintainer> and <license>
+                <exec_depend>rclpy</exec_depend>
+                <exec_depend>std_msgs</exec_depend>
+            # add dependencies corresponding to Node's imports
+                <exec_depend>rclpy</exec_depend>
+                <exec_depend>std_msgs</exec_depend>
+        # install depended packages
+        cd ws/; rosdep install --from-paths -src --ignore-src -r -y 
+    # Add entry point (allows ros 2 to run node from terminal)
+        # edit setup.py
+            # fill in maintainer
+            # Add the following line within the console_scripts brackets of the entry_points field:
+                entry_points={
+                    'console_scripts': [
+                            'talker = py_pubsub.publisher_member_function:main',
+                    ],
+                },
+    # Check setup.cfg
+        # auto populated
+        # tells setuptools to put executables in lib, ros2 run will look here
+
+resolve dependencies
+    cd ros2_ws
+    rosdep install -i --from-path src --rosdistro kilted -y
+
+build
+    if building one package
+        colcon build --packages-select package
+    cd ros2_ws/
+    colcon build --symlink-install
+
+source overlay
+    cd ros2_ws/
+    source install/setup.bash
+
+run the package
+    cd ros2_ws/
+    ros2 run my_package my_node
+
+how to remove ros
+    sudo apt-get purge ros-*
+    sudo apt-get autoremove
+
+list all active nodes and topics
+    ros2 topic list
+    ros2 node list
+
+launch ros graph
+    rqt_graph
+
+RViz
+    ros2 run rviz2 rviz2
+
+tf2
+    handles coordinate frames
+
+    create a frame tree visual
+        ros2 run tf2_tools view_frames
+
+    see what commands are being posted on the topic
+        ros2 topic echo /tf
+
+    see transform between any two frames broadcasted over ROS
+        ros2 run tf2_ros tf2_echo [source_frame] [target_frame]
+
+    visualize with rvis2
+        ros2 run rviz2 rviz2 -d $(ros2 pkg prefix --share turtle_tf2_py)/rviz/turtle_rviz.rviz
+
+QoS (quality of service) policies
+    History
+        Keep last: only store up to N samples, configurable via the queue depth option.
+        Keep all: store all samples, subject to the configured resource limits of the underlying middleware.
+    Depth
+        Queue size: only honored if the “history” policy was set to “keep last”.
+    Reliability
+        Best effort: attempt to deliver samples, but may lose them if the network is not robust.
+        Reliable: guarantee that samples are delivered, may retry multiple times.
+    Durability
+        Transient local: the publisher becomes responsible for persisting samples for “late-joining” subscriptions.
+        Volatile: no attempt is made to persist samples.
+    Deadline
+        Duration: the expected maximum amount of time between subsequent messages being published to a topic
+    Lifespan
+        Duration: the maximum amount of time between the publishing and the reception of a message without the message being considered stale or expired (expired messages are silently dropped and are effectively never received).
+    Liveliness
+        Automatic: the system will consider all of the node’s publishers to be alive for another “lease duration” when any one of its publishers has published a message.
+        Manual by topic: the system will consider the publisher to be alive for another “lease duration” if it manually asserts that it is still alive (via a call to the publisher API).
+    Lease Duration
+        Duration: the maximum period of time a publisher has to indicate that it is alive before the system considers it to have lost liveliness (losing liveliness could be an indication of a failure).
+
+Installed ros2 packages  
+    all installed ros2 packages are in /opt/ros/kilted/share/<package name>
+    their launch files are in /opt/ros/kilted/share/<pkg>/launch
+    ros2 pkg
+        "I want to do something related to ros2 packages"
+        list packages, find packages, inspect packages
+
+Build systems and package management
+    /src/<pkg>/<pkg>
+        contains python modules (nodes)
+        upon colcon build, these are moved to install/<pkg>/lib/python.../
+    /src/<pkg>/<anything not pkg named>
+        examples like maps/, data/, launch/, ...
+        must be added to data_file=[...] in src/<pkg>/setup.py
+        so that upon colcon build, they are moved into install/<pkg>/share/<pkg>/
+        allows filess to be accessed them during runtime using
+            pkg_path = get_package_share_directory('my_pkg')
+            map_path = os.path.join(pkg_path, 'maps', 'my_map.yaml')
+
+
+Changing shebang ros2 add to every executable's first line in /install
+    in setup.cfg add
+        [build_scripts]
+        executable = /usr/bin/env python3
+
+Nuke ros2 cleanup

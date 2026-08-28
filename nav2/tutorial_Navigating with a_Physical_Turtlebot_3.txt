@@ -1,0 +1,8 @@
+
+Requirements
+    they list bringup which is for physical robots
+    Instead, install the gazebo launch file
+        sudo apt install ros-$ROS_DISTRO-turtlebot3 ros-$ROS_DISTRO-turtlebot3-msgs ros-$ROS_DISTRO-turtlebot3-gazebo
+
+1. Launch Turtlebot 3
+    ros2 launch turtlebot3_gazebo turtlebot3_world.launch.py

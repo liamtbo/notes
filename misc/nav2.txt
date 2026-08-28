@@ -1,0 +1,8 @@
+2 level of actions
+	level 1: You -> BT Navigator
+        NavigateToPose action message
+		send a goal pose to BT nav, and it orchestrates all the lower level action servers. 
+		Each one of those action servers has its own .action type
+	level 2: You -> lower level
+		You directly access planner server, controller server, behavior server
+    

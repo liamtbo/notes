@@ -1,3 +1,19 @@
+installing packages
+    sudo apt install <package>
+        “System-approved version of packages”
+        Installs the package version that Debian (and ROS) tested and built against.
+        It’s usually older but guaranteed to work with your OS and ROS release.
+        installs in /usr/lib
+        
+    pip install <package>
+        “Latest version from the internet”
+        Installs directly from PyPI (Python Package Index) — often newer, but it can break system tools or ROS because it may override or conflict with the versions Debian packaged.
+        Context	                                Install path
+        System Python (pip install ...)	        /usr/local/lib/python3.X/dist-packages/
+        User install (pip install --user ...)	~/.local/lib/python3.X/site-packages/
+        Virtualenv or Conda	                    ~/env_name/lib/python3.X/site-packages/
+
+
 problem
     folder with subfolders full of images that I want to put all into one folder
 solution
@@ -28,3 +44,10 @@ solution
             only files, not dirs
         | wc -l
             pipes output (list of files) to wc -l, which counts the number of lines, each representing a file
+
+
+
+thoughts on lab
+finishing ms project with cristina
+Heesung woo's lab (core robotics advisor)
+internship followup

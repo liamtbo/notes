@@ -14,6 +14,15 @@ git commit -m "message"
 git log --oneline
 	shows commit history
 
+git clone <repo name>
+    origin is set to repo name
+
+git fetch origin
+    on local, this will update remotes/origin/main to be up-to-date with remote
+    git merge origin/main
+        merges current local branch with fetched changes from remote repo
+
+
 looking back to old commits
 git checkout ‹commit id>
 	look at code from previous commit (read-only)

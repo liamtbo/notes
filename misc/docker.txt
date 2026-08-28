@@ -1,99 +1,56 @@
-setup
-    sudo apt-get update
-    sudo apt install docker.io
-    sudo systemctl enable docker
-    sudo systemctl status docker
-    sudo system start docker
-    sudo docker run hello-world
 
-    sudo apt-get install docker-compose-v2
+docker file -> image -> container
 
-    docker --version
-    docker compose version
+No sudo commands
+    in every new terminal run the following
+    newgrp docker
 
-start Docker container in the background (detached mode)
-    go to folder wher docker-compose.yml file is
-    sudo docker compose up -d
-        up -> tell docker compose to create and start container in .yml
-        -d -> detached mode (container will run in background)
+list all docker images
+    docker image ls
 
-bringinig down all docker containers
-    sudo docker stop $(sudo docker ps -q)
+remove docker image
+    docker image rm -f <image name>
 
-list all running docker containers on system
-    sudo docker ps
+create a container from an image and run until code is done
+    # run code and close
+        docker run ros:humble
+    # keep open for interation
+        docker run -it ros:humble
 
-copying files from vm to docker
-    sudo docker cp a.out <container id>:/tmp
+print running containers
+    docker container ps
 
-finding IP/MAC/other info of container
-    sudo docker inspect <container ID>
+print all created containers, running or stopped
+    docker container ps -a
 
-running commands inside a docker container
-    need access container OS by getting a shell inside the container
-    get container ID
-        sudo docker ps
-    start shell on container
-        docker exec -it <container ID> /bin/bash
-    leave cntainers shell
-        exit
+start an already existing container
+    docker container start -i <container name>
 
-linux bridge
-    creates communication connection between host and docker network
+stop a running container
+    in terminal on main OS
+    docker container stop <container name>
 
-    [Container 1] eth0 <--> veth1 ----+
-                                    |
-    [Container 2] eth0 <--> veth2 ----+-- [docker0 bridge] <---> [Host Network]
-                                    |
-    [Container 3] eth0 <--> veth3 ----+
+docker cotnainer prune
+    deletes all stopped containers
+    doesn't touch running containers
 
+open multiple terminals in a container
+    open new terminal window on host OS
+    docker exec -it <container name> /bin/bash
 
-example yml file
-    version: "3" // specifies docker compose file format version
-    services: // lists all services (containers) to be created and managed by docker compose
-        attacker:
-            image: handsonsecurity/seed-ubuntu:large // base image to use for container
-            container_name: seed-attacker // name of container
-            tty: true // allows interactive command line use
-            cap_add: // grants all linux kernal capabilities
-                    - ALL
-            privileged: true // container has elevated privileges allowing it to acces host resources directly (modfiy network settings)
-            // used to persist data outside of containers
-            volumes: // mounts a dir from host to the container
-                    - ./volumes:/volumes
-            network_mode: host // container shares hosts network stack (IP)
-        hostA:
-            image: handsonsecurity/seed-ubuntu:large
-            container_name: hostA-10.9.0.5
-            tty: true
-            cap_add:
-                    - ALL
-            networks: // connects container to a custom network (net-10.9.0.0)
-                net-10.9.0.0:
-                    ipv4_address: 10.9.0.5 // gives container fixed IP address
-            // starts service openbsd-inetd to simular a networked application or host
-            // and to keep containers running indefinitely
-            command: bash -c "
-                        /etc/init.d/openbsd-inetd start  &&
-                        tail -f /dev/null
-                    "
-        hostB:
-            image: handsonsecurity/seed-ubuntu:large
-            container_name: hostB-10.9.0.6
-            tty: true
-            cap_add:
-                    - ALL
-            networks:
-                net-10.9.0.0:
-                    ipv4_address: 10.9.0.6
-            command: bash -c "
-                        /etc/init.d/openbsd-inetd start  &&
-                        tail -f /dev/null
-                    "    
-    networks: // defines a custome network for the containers
-        net-10.9.0.0:
-            name: net-10.9.0.0 // names network
-            ipam: // IP Adress Management
-                config:
-                    - subnet: 10.9.0.0/24 // subnet IP range
+making permanent changes to an image
+    make a new docker file based off the image
 
+building an image from a docker file
+    cd into dir with dockerfile
+    docker image build -t <desired name> .
+
+You have code on host os and you want docker container to start up around those files
+    volumes 
+        shared virtual drive you can't easily access outside docker, but can make it availbale to any container that need it
+    bind mounts
+        moutn dir of source code into the container, and now the files are there to be accessed
+        ex
+            on host os, cd into folder
+            docker run -it -v $PWD/<abs source folder>:<abs path inside docker>
+            if you create a file inside this folder in the container, it'll be difficult to access outside the container

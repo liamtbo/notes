@@ -1,0 +1,38 @@
+Download rasberry Pi flasher (look it up)
+
+Flash ssd card
+    plug into computer via adapter
+    run raspberry pi flasher
+    place ssd into raspberry pi
+
+make sudo command require password and timeout if incorrect
+    sudo visudo
+    add line
+        Defaults:USER timestamp_timeout=60
+        60 minute timeout
+
+Pi software is up-to-date
+    sudo apt update; sudo apt full-upgrade
+
+Enable SSH
+    generate ssh pub and priv kys via ssh.txt
+    on raspberry pi
+        mkdir .ssh
+        chmod 700 .ssh
+    on personal computer
+        scp .ssh/id_rsa.pub <username>@<ip address>:.ssh/authorized_keys
+    on raspberry pi
+        chmod 644 .ssh/authorized_keys
+        sudo nano /etc/ssh/sshd_config
+            PasswordAuthentication no
+            ctrl + s, ctrl + x
+
+Turn on firewall
+    sudo apt install ufw
+    https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu
+
+Block malicious connections
+    https://pimylifeup.com/raspberry-pi-fail2ban/
+    sudo systemctl enable fail2ban
+    sudo systemctl start fail2ban
+    sudo systemctl status fail2ban

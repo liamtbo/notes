@@ -1,0 +1,52 @@
+
+github
+    # 1. Go to your SSH directory
+        cd ~/.ssh
+
+    # 2. List files (including hidden ones)
+        ls -a
+
+        id_rsa
+            your private key
+            do not share!
+        id_rsa.pub
+            your public key
+            safe to share
+        authorized_keys
+            your laptop can act as a server - i.e. people can log into the machine
+        known_hosts
+            stores fingerprints of machines you've SSH'd into
+            prevent man-in-the-middle attacks
+        known_hosts.old
+            backup of previous known hosts
+        config
+            optional per-host SSH config
+
+    # 3. Generate a new SSH key pair
+    ssh-keygen -t rsa -b 4096 -C "liamtbo@gmail.com"
+
+    # 4. Start the SSH agent
+    eval "$(ssh-agent -s)"
+
+    # 5. Add your private key to the agent
+    ssh-add ~/.ssh/id_rsa
+
+    # 6. Secure the private key permissions
+    chmod 600 ~/.ssh/id_rsa
+
+    # 7. Copy your public key (to add to GitHub, etc.)
+    cat ~/.ssh/id_rsa.pub
+
+ssh into gui (to see files in vscode)
+    Install the Remote SSH extension
+
+    In VS Code, go to the Extensions tab (left sidebar).
+
+    Search for: “Remote - SSH” (from Microsoft)
+
+    Install it.
+
+    Open the Command Palette
+    Press Ctrl+Shift+P (Windows/Linux) or Cmd+Shift+P (Mac).
+
+    Romote ssh: connec to host

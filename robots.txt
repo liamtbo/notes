@@ -1,0 +1,2 @@
+robot internals (cpu, mem, cores, gpu, ...)
+	jtop
